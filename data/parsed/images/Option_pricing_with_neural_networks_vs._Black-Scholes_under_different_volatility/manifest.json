@@ -1,0 +1,190 @@
+{
+  "job_id": "pjb-3yb2v20jjn3c4v5fic62s6k92n3i",
+  "name": "Option pricing with neural networks vs. Black-Scholes under different volatility forecasting approaches for BIST 30 index options.pdf",
+  "slug": "Option_pricing_with_neural_networks_vs._Black-Scholes_under_different_volatility",
+  "n_remote_images": 33,
+  "n_saved_figures": 15,
+  "n_markdown_links_updated": 2,
+  "images": [
+    {
+      "filename": "page_1_image_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 3411,
+      "bbox": {
+        "x": 146,
+        "y": 46,
+        "w": 32,
+        "h": 31
+      }
+    },
+    {
+      "filename": "page_1_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 9742,
+      "bbox": {
+        "x": 36,
+        "y": 47,
+        "w": 46,
+        "h": 59
+      }
+    },
+    {
+      "filename": "page_3_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 44687,
+      "bbox": {
+        "x": 77,
+        "y": 70,
+        "w": 173,
+        "h": 182
+      }
+    },
+    {
+      "filename": "page_5_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 486440,
+      "bbox": {
+        "x": 327,
+        "y": 69,
+        "w": 203,
+        "h": 678
+      }
+    },
+    {
+      "filename": "page_6_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 445221,
+      "bbox": {
+        "x": 60,
+        "y": 69,
+        "w": 204,
+        "h": 678
+      }
+    },
+    {
+      "filename": "page_7_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 208962,
+      "bbox": {
+        "x": 112,
+        "y": 68,
+        "w": 370,
+        "h": 666
+      }
+    },
+    {
+      "filename": "page_8_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 180163,
+      "bbox": {
+        "x": 110,
+        "y": 68,
+        "w": 374,
+        "h": 667
+      }
+    },
+    {
+      "filename": "page_9_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 319886,
+      "bbox": {
+        "x": 125,
+        "y": 70,
+        "w": 343,
+        "h": 618
+      }
+    },
+    {
+      "filename": "page_10_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 193341,
+      "bbox": {
+        "x": 125,
+        "y": 70,
+        "w": 341,
+        "h": 625
+      }
+    },
+    {
+      "filename": "page_11_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 187286,
+      "bbox": {
+        "x": 45,
+        "y": 327,
+        "w": 679,
+        "h": 124
+      }
+    },
+    {
+      "filename": "page_11_table_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 215980,
+      "bbox": {
+        "x": 45,
+        "y": 72,
+        "w": 679,
+        "h": 111
+      }
+    },
+    {
+      "filename": "page_12_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 193876,
+      "bbox": {
+        "x": 126,
+        "y": 116,
+        "w": 341,
+        "h": 571
+      }
+    },
+    {
+      "filename": "page_13_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 162253,
+      "bbox": {
+        "x": 126,
+        "y": 69,
+        "w": 341,
+        "h": 617
+      }
+    },
+    {
+      "filename": "page_14_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 335842,
+      "bbox": {
+        "x": 125,
+        "y": 70,
+        "w": 345,
+        "h": 610
+      }
+    },
+    {
+      "filename": "page_15_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 191387,
+      "bbox": {
+        "x": 126,
+        "y": 69,
+        "w": 342,
+        "h": 616
+      }
+    }
+  ]
+}

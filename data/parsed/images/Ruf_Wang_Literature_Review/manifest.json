@@ -1,0 +1,166 @@
+{
+  "job_id": "pjb-wsrlkfonk4s8gb5x40yht6t10xtw",
+  "name": "Ruf_Wang_Literature_Review.pdf",
+  "slug": "Ruf_Wang_Literature_Review",
+  "n_remote_images": 46,
+  "n_saved_figures": 13,
+  "n_markdown_links_updated": 1,
+  "images": [
+    {
+      "filename": "page_1_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 16221,
+      "bbox": {
+        "x": 389,
+        "y": 39,
+        "w": 132,
+        "h": 52
+      }
+    },
+    {
+      "filename": "page_5_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 374006,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 673,
+        "h": 373
+      }
+    },
+    {
+      "filename": "page_6_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 399945,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 674,
+        "h": 408
+      }
+    },
+    {
+      "filename": "page_7_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 422323,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 674,
+        "h": 384
+      }
+    },
+    {
+      "filename": "page_8_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 391361,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 673,
+        "h": 384
+      }
+    },
+    {
+      "filename": "page_9_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 388407,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 674,
+        "h": 385
+      }
+    },
+    {
+      "filename": "page_10_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 404987,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 673,
+        "h": 391
+      }
+    },
+    {
+      "filename": "page_11_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 446897,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 674,
+        "h": 409
+      }
+    },
+    {
+      "filename": "page_12_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 223725,
+      "bbox": {
+        "x": 84,
+        "y": 85,
+        "w": 674,
+        "h": 228
+      }
+    },
+    {
+      "filename": "page_13_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 195008,
+      "bbox": {
+        "x": 110,
+        "y": 265,
+        "w": 374,
+        "h": 290
+      }
+    },
+    {
+      "filename": "page_14_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 270526,
+      "bbox": {
+        "x": 111,
+        "y": 241,
+        "w": 374,
+        "h": 338
+      }
+    },
+    {
+      "filename": "page_15_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 178001,
+      "bbox": {
+        "x": 107,
+        "y": 93,
+        "w": 405,
+        "h": 628
+      }
+    },
+    {
+      "filename": "page_17_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 134514,
+      "bbox": {
+        "x": 111,
+        "y": 83,
+        "w": 374,
+        "h": 207
+      }
+    }
+  ]
+}

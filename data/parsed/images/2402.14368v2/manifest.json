@@ -1,0 +1,202 @@
+{
+  "job_id": "pjb-jdzdimywtclxf4dvq8kd4qiz5rpu",
+  "name": "2402.14368v2.pdf",
+  "slug": "2402.14368v2",
+  "n_remote_images": 54,
+  "n_saved_figures": 16,
+  "n_markdown_links_updated": 0,
+  "images": [
+    {
+      "filename": "page_10_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 45839,
+      "bbox": {
+        "x": 210,
+        "y": 129,
+        "w": 190,
+        "h": 135
+      }
+    },
+    {
+      "filename": "page_13_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 110996,
+      "bbox": {
+        "x": 145,
+        "y": 132,
+        "w": 323,
+        "h": 219
+      }
+    },
+    {
+      "filename": "page_14_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 16215,
+      "bbox": {
+        "x": 367,
+        "y": 131,
+        "w": 92,
+        "h": 72
+      }
+    },
+    {
+      "filename": "page_14_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 50962,
+      "bbox": {
+        "x": 142,
+        "y": 132,
+        "w": 212,
+        "h": 134
+      }
+    },
+    {
+      "filename": "page_15_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 15981,
+      "bbox": {
+        "x": 367,
+        "y": 131,
+        "w": 94,
+        "h": 72
+      }
+    },
+    {
+      "filename": "page_15_chart_3_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 11685,
+      "bbox": {
+        "x": 148,
+        "y": 133,
+        "w": 86,
+        "h": 71
+      }
+    },
+    {
+      "filename": "page_15_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 12490,
+      "bbox": {
+        "x": 258,
+        "y": 133,
+        "w": 87,
+        "h": 71
+      }
+    },
+    {
+      "filename": "page_24_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 38651,
+      "bbox": {
+        "x": 177,
+        "y": 192,
+        "w": 255,
+        "h": 55
+      }
+    },
+    {
+      "filename": "page_25_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 91853,
+      "bbox": {
+        "x": 110,
+        "y": 122,
+        "w": 389,
+        "h": 160
+      }
+    },
+    {
+      "filename": "page_26_table_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 37944,
+      "bbox": {
+        "x": 207,
+        "y": 390,
+        "w": 195,
+        "h": 65
+      }
+    },
+    {
+      "filename": "page_26_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 96296,
+      "bbox": {
+        "x": 177,
+        "y": 192,
+        "w": 255,
+        "h": 148
+      }
+    },
+    {
+      "filename": "page_27_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 20288,
+      "bbox": {
+        "x": 111,
+        "y": 309,
+        "w": 94,
+        "h": 90
+      }
+    },
+    {
+      "filename": "page_27_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 68615,
+      "bbox": {
+        "x": 114,
+        "y": 139,
+        "w": 382,
+        "h": 90
+      }
+    },
+    {
+      "filename": "page_27_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 75124,
+      "bbox": {
+        "x": 111,
+        "y": 296,
+        "w": 386,
+        "h": 104
+      }
+    },
+    {
+      "filename": "page_29_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 165704,
+      "bbox": {
+        "x": 112,
+        "y": 178,
+        "w": 389,
+        "h": 155
+      }
+    },
+    {
+      "filename": "page_30_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 93063,
+      "bbox": {
+        "x": 114,
+        "y": 128,
+        "w": 377,
+        "h": 146
+      }
+    }
+  ]
+}

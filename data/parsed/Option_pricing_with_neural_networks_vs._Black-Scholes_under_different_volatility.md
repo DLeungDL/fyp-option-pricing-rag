@@ -1,0 +1,2347 @@
+![logo: BORSA ISTANBUL](page_1_image_1_v2.jpg)
+Available online at www.sciencedirect.com
+
+# Borsa İstanbul Review
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+http://www.elsevier.com/journals/borsa-istanbul-review/2214-8450
+
+![icon: Check for updates](page_1_image_2_v2.jpg)
+
+Full Length Article
+
+# Option pricing with neural networks vs. Black-Scholes under different volatility forecasting approaches for BIST 30 index options
+
+Zeynep İltüzer
+
+*Istanbul Ayvansaray University, The Department of Business Administration, The Faculty of Economics, Administrative and Social Sciences, Prof. Muammer Aksoy Cad. No: 10 Kazlıçeşme/Zeytinburnu, İstanbul, Turkiye*
+
+Received 26 August 2021; revised 26 December 2021; accepted 27 December 2021
+Available online 31 December 2021
+
+----
+
+### Abstract
+
+This study compares the performances of neural network and Black-Scholes models in pricing BIST30 (Borsa Istanbul) index call and put options with different volatility forecasting approaches. Since the volatility is the key parameter in pricing options, GARCH (Generalized Autoregressive Conditional Heteroskedasticity), implied volatility, historical volatility, and implied volatility index (VBI) are used to determine the best volatility approach for pricing options according to moneyness and time-to-maturity dimensions. The paper also includes a subsample analysis in which the pricing performance of the models are evaluated during the turbulent periods. Overall results indicate that neural network outperforms Black-Scholes during tranquil times while Black-Scholes outperforms neural network during turbulent periods for call options. For put options, the Black-Scholes model is the best model during tranquil periods while neural network is the best model during turbulent periods.
+Copyright © 2021, Borsa İstanbul Anonim Şirketi. Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+*JEL classification:* C45; G13; G14
+
+*Keywords:* BIST index options; Black-Scholes; Neural network; Volatility
+
+----
+
+## 1. Introduction
+
+As the liberalization and connectedness of the international financial markets have increased, risks to which economic agents are exposed have increased and changed rapidly. The pricing of financial derivatives and, therefore, options to manage and survive in these increasingly volatile markets has gained importance and led to rapid developments in both the literature and practice. Even though the first studies on the pricing of options appeared in the early 1900s, the seminal work of Black and Scholes (BS; 1972) became a cornerstone in the option pricing literature and in the trading of options because it is widely accepted and used by the practitioners in financial markets. Since then, many efforts have been made to relax the unrealistic assumptions of the model, such as Cox et al. (1979), Rendleman and Bartter (1979), Rubinstein (1983), Boyle (1988), Hull and White (1987), Scott (1987), Naik (1993), Amin and Ng (1993), Duan (1995), and Scott (2002). The assumption of constant volatility of the underlying asset is found to be the most important assumption, reported by many studies that analyze the mispricing of the BS model—such as Macbeth and Merville (1979), Dumas et al. (2002), and Poon (2005)—which needs to be relaxed in order to obtain more accurate pricing formulas. For parametric models, how the volatility is modeled—such as a continuous stochastic process or as a jump-diffusion process—played a crucial role in whether models are successful. However, this increased the mathematical complexity of the models, which limited their understanding and use by the majority of practitioners. After the development of many different versions of the BS option pricing model, which addresses the different assumptions of the model, the use and test of artificial neural networks (NNs) in pricing options has attracted the attention of
+
+____________________
+*E-mail addresses:* zeynepiltuzer@ayvansaray.edu.tr, iltuzerz@itu.edu.tr.
+Peer review under responsibility of Borsa İstanbul Anonim Şirketi.
+
+https://doi.org/10.1016/j.bir.2021.12.001
+2214-8450/Copyright © 2021, Borsa İstanbul Anonim Şirketi. Published by Elsevier B.V. This is an open access article under the CC BY-NC-ND license (http://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+---
+
+
+
+Z. İltüzer
+
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+researchers in finance as an alternative pricing model that requires **no** assumptions about the variables and their relationship.<sup>1</sup>
+
+NNs are a machine learning technique that has been widely used in many disciplines and industries for the past 20 years because of increasing data availability and technological developments in terms of both hardware and software. The majority of the research in this area provides strong evidence of the superior performance of NNs relative to the BS model. <font color="blue">Malliaris and Salchenberger (1993)</font>, <font color="blue">Hutchinson et al. (1994)</font>, <font color="blue">Gradojevic et al. (2009)</font>, <font color="blue">Garcia and Gencay (2000)</font>, <font color="blue">Yang et al. (2017)</font>, and <font color="blue">Fadda (2020)</font> compare the performance of NNs to the BS model for S&P index options or futures options, and they all reach the conclusion that the NNs outperform the BS model, but that a few of them report findings that indicate better performance by BS for short-term in-the-money options. The success of NNs in pricing options is also reported for other mature stock market index options. <font color="blue">Yao et al. (2000)</font> examine the pricing of Nikkei 225 index options or futures options with NNs and the BS model and provide evidence that NNs have better performance in the pricing of in-the-money and out-of-the-money options whereas the BS model has better performance in the pricing of at-the-money options. <font color="blue">Amilon (2003)</font> analyzes the performance of NNs and the BS model for Swedish stock index options in which both the implied and the historical volatility estimations are used as volatility inputs for the models and provides strong evidence of the better performance by NNs with the implied volatility at all moneyness levels. <font color="blue">Anders et al. (1998)</font> performed a comparative analysis of the DAX index options by applying a statistical inference technique to determine the optimal NN architecture and reported that NNs outperformed the BS model. <font color="blue">Bennell and Sutcliffe (2005)</font> compare the performance of NNs with the BS model for FTSE 100 index options and reach conclusions similar to those from the S&P index options, which is that NNs achieve superior performance in pricing at-the-money and out-of-the money options but the BS model has better performance in pricing in-the-money options. To the best of my knowledge, <font color="blue">Lin and Yeh (2005)</font> offer the only study that compares the pricing performance of NNs with that of the BS model for an emerging stock market index option. Their findings provide evidence that the BS model performs better than the NN model in pricing Taiwan stock index options. <font color="blue">Wang (2009a)</font>, <font color="blue">Lin and Yeh (2009)</font>, <font color="blue">Tseng et al. (2008)</font>, and <font color="blue">Wang et al. (2012)</font> examine the pricing of Taiwan stock index options with NNs under different volatility estimations, such as historical volatility, implied volatility, and symmetric and asymmetric GARCH < Generalized Autoregressive Conditional Heteroskedasticity > volatility without making any comparison to the BS model. Some report that the GARCH family models lead to better pricing performance in NNs and others show that the implied volatility approach gives better performance.
+
+Overall, the literature demonstrates the superior performance of NNs in pricing options compared to the BS model, especially for at-the-money and out-of-the-money options on mature stock market indexes. However, it is not known whether the reported outperformance of NNs is also valid for options in emerging stock markets because of the low number of studies on this topic. This study fills this gap by comparing the pricing performances of NNs with that of the BS model for call and put BIST < Borsa Istanbul> 30 index options. To the best of my knowledge, this is the first study that attempts to perform a NN in pricing the options of Turkish stock market index and compares its performance with that of the traditional BS model. Because volatility is the key input for pricing options, the study also examines the effects of using different volatility forecasting approaches—that is, implied volatility, short- and long-term historical volatility, and GARCH volatility—on the pricing performance of the models. More specifically, this study answers the following questions: Is the nonparametric artificial NN model or the traditional BS model better at pricing BIST 30 index options? Which volatility forecasting approaches increase the pricing performance of the models and how do they affect the pricing behavior of models? And does the performance of the models vary according to moneyness and time to maturity of the options? Determination of the best pricing model for call and put options will help to make hedging, portfolio investment, and risk management decisions more effective by applying different trading strategies to underpriced and overpriced options in the market.
+
+Section **2** provides a concise explanation of the models, details of the methodology, and a description of the data. Empirical results are given in Section **3**. A summary and general conclusions are presented in Section **4**.
+
+## 2. The models, methodology, and data
+
+### 2.1. Artificial neural network (ANN)
+
+ANNs, a type of neural network, are information processing models that learn from the sample data. The most commonly used kind of ANN is the multilayer perceptron (MLP). The simplest architecture of an MLP is depicted in <font color="blue">Fig. 1</font>. The inputs $X_i$ s are fed into the first layer (the input layer), and the outputs $Y_j$ of the network are given in the last layer (the output layer). Between the input and the output layers are hidden layers with a number of neurons, which need to be discovered during learning.
+
+The basic process unit of a MLP architecture is a neuron, which is connected with a certain weight, $w$, to every neuron in the next layer, which implies that MLPs are fully connected. Each neuron uses a nonlinear activation function $\varnothing$ that transforms the weighted signals and passes it on to the subsequent layer. In this way, the inputs $X_i$ are fed forward to the hidden layer with weights $w_{ik}$ and the neurons in the hidden layer, $h_k$
+
+---
+<sup>1</sup> Amilon (2003), Anders et al. (1998), Bennell and Sutcliffe (2005), Daglish (2003), Fadda (2020), Garcia and Gencay (2000), Gaspar et al. (2020), Gradojevic et al. (2009), Hutchinson et al. (1994), İltüzer Samur and Temur (2009), Ivas,cu (2021), Lajbcygier (2004), Lin and Yeh (2005, 2009), Malliaris and Salchenberger (1993), Morelli et al. (2004), Tseng et al. (2008), Wang (2009a, 2009b), Wang et al. (2012), Yadav (2021), Yang et al. (2017), and <font color="blue">Yao et al. (2000)</font>.
+
+726
+
+---
+
+
+
+Z. İltizler
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+## Fig. 1. A single-hidden layer MLP < Multilayer Perceptron > architecture.
+
+Back Propagate The Error
+Feed Forward Activation
+
+<table>
+  <tr>
+    <th>Layer</th>
+    <th>Nodes</th>
+  </tr>
+<tr>
+    <td>Input Layer</td>
+<td>X<sub>1</sub>, X<sub>2</sub>, ..., X<sub>i</sub></td>
+  </tr>
+<tr>
+    <td>Hidden Layer</td>
+<td>h<sub>k</sub></td>
+  </tr>
+<tr>
+    <td>Output Layer</td>
+<td>Y<sub>1</sub>, Y<sub>i</sub></td>
+  </tr>
+</table>
+
+as shown in Equation (1), are fed forward to the output layer, $Y_j$, with weights $w_{kj}$ as shown in Equation (2).
+
+$$h_k = \varphi\left(\sum_{i} w_{ik} x_i + b_1\right) \tag{1}$$
+
+$$y_j = \varphi\left(\sum_{k} w_{kj} h_k + b_2\right) \tag{2}$$
+
+where $b_1$ and $b_2$ are the bias terms for the hidden layer and the output layer, respectively. The activation function used in the study is the rectified linear unit function, ReLu, which is given in Equation (3), for both the hidden layer and the output layer. The ReLu is one of the most popular activation functions used in wide variety of NN applications in recent years and found to yield better performance than other activation functions, that is, hyperbolic tangent and sigmoid functions (<font color="#0000FF">Glorot et al. (2011)</font>; <font color="#0000FF">Zaheer & Shaziya, 2018</font>).
+
+$$\varphi(z) = \max\{0, z\} \tag{3}$$
+
+The network outputs, $Y_j$, are compared to the observed values, $t_j$, by estimating the sum of squared errors as given in Equation (4), and then the errors are propagated backward so that weights, $w_{ik}$ and $w_{kj}$, are updated in order for the total error to be minimized.
+
+$$L = \frac{1}{2} \sum_{j} (t_j - Y_j)^2 \tag{4}$$
+
+In the study, two NN models are built as in Equations (5) <u>and (6)</u>. The first model uses the inputs and outputs of the BS model, where $S_t$ is the spot price of the index at time $t$, $X$ is the exercise price of the option, $\sigma_t$ is the volatility at time $t$, $r_t$ is the risk-free interest rate at time $t$, and $T-t$ is the time to maturity as the inputs and call $c$ (or put $p$) price as the output.
+
+$$c_t = f(S_t, X, r_t, T-t, g(\sigma_t)) \tag{5}$$
+
+where $g(\sigma_t)$ indicates the results of the different volatility forecasting approaches detailed in Section 2.3. The second model as shown in Equation (6) is built by following <font color="#0000FF">Hutchinson et al. (1994)</font>, in which $f$ is homogeneous of degree one in $X$ and $S_t$, and the network takes $\frac{S_t}{X}$ as the input, instead of taking $S_t$ and $X$ as separate inputs, and map it to the option price divided by the exercise price $\frac{c_t(p_t)}{X}$.
+
+$$\frac{c_t}{X} = f\left(\frac{S_t}{X}, r_t, T-t, g(\sigma_t)\right) \tag{6}$$
+
+The European BIST 30 index call and put options data between March 2017 and August 2021 is used in the analysis.<sup>2</sup> The BIST 30 daily closing prices between January 2016 and August 2021 is used for the volatility estimations detailed in Section 2.3 when it is necessary, and interpolation of two closest interbank rates (TRLIBOR) to the maturity of the option are used as approximations for the risk-free rate in the Turkish economy.<sup>3</sup> The NNs whose input and outputs represented by Equations (5) <u>and (6)</u> are trained in batch mode, and the limited-memory Broyden–Fletcher–Goldfarb–Shanno algorithm (LBFGS) is used for optimization to adjust the network weights.<sup>4</sup> For the model selection, cross-validation is applied by splitting the data into three parts: training, validation, and test sets. Data between March 2017 and June 2020 are used for training, data between July and December 2020 are used for validation, and data between January and August 2021 are used for the test set. An approach that splits data into train, test, and validation periods, similar to that in <font color="#0000FF">Gu et al. (2020)</font>, is followed in the study. Additionally, in order to evaluate the model performance in periods of turmoil, a subsample period covering March 2017 and April 2018 is used. The World Uncertainty Index (WUI) developed in <font color="#0000FF">Ahir et al. (2018)</font> for Turkey (WUITUR) between March 2017 and August 2021 is used to determine the period of turmoil in the full sample.<sup>5</sup> According to the WUITUR, the full sample period includes a peak in April 2018. Therefore, the model performance is also evaluated for its predictive ability in April 2018. The data between March 2017 and December 2017 are used for training for this purpose, the data between January and March 2018 are used for validation, and the data for April 2018 are used for the test set in the subsample.
+
+The network architecture with the lowest validation root mean squared error— $RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (c_i - \widehat{c}_i)^2}$ —is selected as the optimal architecture, where $c_i$ is the closing price of the call (put) option, and $\widehat{c}_i$ is the option price predicted by the NN model. The test set does not have any influence on the choice of network architecture and is used only for testing the out-of-the-sample performance of the models. To avoid overfitting the training data, early stopping is applied. That is, the model is
+
+---
+<sup>2</sup> The option data was obtained from <font color="#0000FF">datastore.borsaistanbul.com</font>.
+<sup>3</sup> The TRLIBOR historical data was obtained from <font color="#0000FF">www.trlibor.org</font>.
+<sup>4</sup> Python and relevant libraries are used for building and estimating the network parameters.
+<sup>5</sup> WUITUR is available at <font color="#0000FF">https://fred.stlouisfed.org/series/WUITUR/</font>.
+
+727
+
+---
+
+
+
+Z. İltızer
+
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+trained on the training data, and the performance improvement is monitored in the validation data. When the error starts to increase in the validation set, the early stopping method stops training and prevents overfitting.
+
+*2.2. Black-Scholes option pricing model*
+
+$$c_t = S_t N(d_1) - X e^{-r_t (T-t)} N(d_2) \tag{7}$$
+
+$$p_t = X e^{-r_t (T-t)} N(-d_2) - S_t N(-d_1) \tag{8}$$
+
+$$d_1 = \frac{\ln\left(\frac{S_t}{X}\right) + \left(r_t + \frac{g(\sigma_t)^2}{2}\right)(T-t)}{g(\sigma_t)\sqrt{T-t}} \tag{9}$$
+
+$$d_2 = d_1 - g(\sigma_t)\sqrt{T-t} \tag{10}$$
+
+where $N(x)$ is the cumulative probability distribution, and $g(\sigma_t)$ is the volatility estimates from different volatility forecasting approaches detailed in Section <u>2.3</u>.
+
+**2.3. Volatility forecasts**
+
+**2.3.1. Historical volatility**
+
+Historical volatility forecasts are basically the annualized standard deviation of daily logarithmic return data $R_t = \ln\left(\frac{S_t}{S_{t-1}}\right)$, as shown in Equation (11)<sup>6</sup>. Five versions of historical volatility are estimated based on how far the data covers the past observations, that is, 360 days, 30 days, or 10 days for estimations based on calendar days and 21 and 252 days for estimations based on trading days, which reflects the short- and relatively long-term tendencies of the stock market.
+
+$$\widehat{\sigma}_{t+1} = \sqrt{\frac{1}{n-1} \sum_{i=t-(n-1)}^{i=t} (R_i - \overline{R})^2 \sqrt{360}} \tag{11}$$
+
+where $\overline{R}$ is the mean of daily logarithmic returns, $n$ equals 10 days, 30 days, 360 days, 21 days, and 252 days for five different historical volatility forecasts, denoted $g(\sigma_t) = \widehat{\sigma}_t^{10}$, $g(\sigma_t) = \widehat{\sigma}_t^{30}$, $g(\sigma_t) = \widehat{\sigma}_t^{360}$, $g(\sigma_t) = \widehat{\sigma}_t^{21}$, and $g(\sigma_t) = \widehat{\sigma}_t^{252}$. The choice of 10- and 30-day data is based on the study by <u>Amilon (2003)</u>. Additionally, historical volatility based on the most recent one-year data is estimated to examine whether the performance of the models increases by using volatility forecasts that take into account the relatively long-term aspects of the underlying asset.
+
+**2.3.2. The GARCH model**
+
+The GARCH model is proposed by <u>Ballerslev (1986)</u>, in which the volatility clustering and heteroskedasticity observed in the stock market returns are taken into account. The GARCH(1,1) model is:
+
+$$R_t = \mu + \varepsilon_t$$
+$$\varepsilon_t = \sigma_t z_t, \ z_t \sim N(0, 1) \tag{12}$$
+$$\sigma_t = \omega + \alpha \varepsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
+
+In the study, the parameters of Equation <u>(12)</u> are estimated by using the most recent one-year logarithmic returns of the BIST 30 index, $R_t$, before the date of the forecast. Then, the model is used for a volatility forecast for date $t$ and annualized by multiplying it by $\sqrt{360}$. For each day, the sample data are rolled over one day, and the same procedure is repeated. The volatility forecasts of the GARCH (1,1) model are $g(\sigma_t) = \widehat{\sigma}_t^{garch} = \sigma_t \sqrt{360}$ for date $t$.
+
+**2.3.3. Implied volatility**
+
+The implied volatility forecast, $\widehat{\sigma}_t^{implied}$, is obtained by calibrating the volatility parameter of the BS model to obtain a perfect fit for the at-the-money call (put) closing price at time $t$, which is then used for volatility forecasts of the other options traded in the market on the same day. That is, $g(\sigma_t) = \widehat{\sigma}_t^{implied}$. When call (put) options whose moneyness equal 1 on the day $t$ are not available, the option whose moneyness is closest to 1 is chosen for calibration. The implied volatility of the at-the-money (ATM) options are widely accepted in the literature as the true volatility of the underlying asset reflected in the option prices (<u>Chance et al., 2017</u>).
+
+**2.3.4. VBI**
+
+The implied volatility index for the Turkish option market (VBI) developed by <u>Sensoy and Omole (2018)</u>, $\widehat{\sigma}_t^{vbi}$, is used for volatility input for $t$. They provide a guideline for the parameter selection procedure when estimating VIX for the Turkish option market, which takes into account the market microstructure, especially the relative illiquidity of the Turkish stock market compared to developed markets, for which VIX is primarily constructed. For details on the estimation and procedure, see <u>Sensoy and Omole (2018)</u>.
+
+## 3. Empirical analysis and results
+
+In this section, we use eight different volatility forecasting approaches to compare the NN models, represented by Equations <u>(5) and (6)</u>, and the traditional BS model for pricing BIST 30 index call and put options. The models are evaluated based on the out-of-sample RMSEs (Root Mean Squared Error) by grouping the options according to moneyness and the time to maturity. We perform the Diebold-Mariano test to check the statistical significance of the difference in the predictive accuracy of the models. The options are grouped into three categories based on their moneyness, $S_t/K$, by following similar approaches by <u>Gradojevic et al. (2009)</u>, <u>Tseng et al. (2008)</u>, and <u>Lin and Yeh (2009)</u>. The call options whose moneyness is between 0.97 and 1.03 are grouped together as at-the-money (ATM) options (ATM for put options), those whose moneyness is higher than 1.03 are grouped as in-the-money (ITM) options (OTM for put options), and those whose moneyness is lower than 0.97 are grouped as out-of-the-money (OTM) options (ITM for put options). Following <u>Fadda (2020)</u>,
+
+<sup>6</sup> Annualized by 252-day for trading day calculations.
+
+728
+
+---
+
+*Z. İltüzer*
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+according to the time-to-maturity dimension, options whose time to maturity is up to one month are grouped as short-term options, and options whose time to maturity is between one and three months are grouped as medium-term options, and options with a time to maturity of more than three months are grouped as long-term options.
+
+### 3.1. Call options
+
+Table 1 presents the out-of-sample RMSEs of the models for call options for both moneyness and the time to maturity. According to the results, for OTM call options, the NN2 model with implied volatility is the best model as it has the smallest RMSE, and the NN models outperform BS with every volatility forecast method. Among the ATM options, the NN2 model with ten-day historical volatility is the best model, closely followed by the NN1 model with implied volatility and the NN2 model with the implied volatility index VBI. Among the ITM options, the best model is the NN2 model with implied volatility, and the NN2 model performs better than BS and NN1 with every volatility forecast method. Another striking result is that all models have worse performance for ITM options than for OTM and ATM options, with RMSEs almost four or five times larger, which implies that the pricing of ITM options has higher pricing errors than pricing OTM and ATM options. In terms of the time to maturity, the NN2 model with implied volatility is the best model for both short- and medium-term options, whereas the NN1 model with VBI is the best model for long-term options. Moreover, most of the time NN2 has better performance than BS and NN1 with every volatility forecasting approach at all time-to-maturity dimensions. The overall results imply that the NN2 model is a better way to price call options than BS and NN1 models.
+
+To show changes in the model performance in periods of turmoil, Table 2 presents RMSEs of the models for pricing options traded in April 2018, which is considered a more turbulent period than other months according to the WUI in the full sample, for each moneyness and time-to-maturity dimension. For OTM and ATM options, the BS model with 30- and 21-day historical volatility is the best and has the lowest RMSEs. For every volatility forecast method most of the time, BS has better performance than NN1 and NN2. Among the ITM options, the NN2 model with 360-day historical volatility has the best performance, closely followed by NN2 with 30-day historical volatility. When pricing performance is evaluated according to the time-to-maturity dimension, the best model is BS with 360- and 252-day historical volatility for short-term options, BS with 30-, 21-, and 252-day historical volatility for medium-term options, and NN2 with ten-day historical volatility for long-term options. Additionally, BS performs better than NN1 and NN2 with every volatility forecasting model for short-term options, which implies that BS is the best model for pricing short-term call options in times of turmoil regardless of which volatility forecasting method is used for volatility inputs.
+
+### Table 1<br />Out-of-sample RMSEs of models for call options: Full sample.
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="25">Panel A: Performance of Models According to Moneyness</th>
+        </tr>
+<tr>
+            <th rowspan="2"></th>
+            <th colspan="3">IMPLIED</th>
+            <th colspan="3">GARCH</th>
+            <th colspan="3">HIS360</th>
+            <th colspan="3">HIS30</th>
+            <th colspan="3">HIS10</th>
+            <th colspan="3">HIS21</th>
+            <th colspan="3">HIS252</th>
+            <th colspan="3">VBI</th>
+        </tr>
+<tr>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>OTM</td>
+<td>11.33</td>
+<td>11.45</td>
+<td>8.34</td>
+<td>26.06</td>
+<td>8.86</td>
+<td>8.77</td>
+<td>24.13</td>
+<td>12.30</td>
+<td>16.18</td>
+<td>22.05</td>
+<td>8.83</td>
+<td>14.02</td>
+<td>18.51</td>
+<td>13.99</td>
+<td>9.37</td>
+<td>18.51</td>
+<td>12.49</td>
+<td>12.20</td>
+<td>15.34</td>
+<td>9.97</td>
+<td>12.07</td>
+<td>13.35</td>
+<td>9.29</td>
+<td>9.24</td>
+        </tr>
+<tr>
+            <td>ATM</td>
+<td>9.78</td>
+<td>9.44</td>
+<td>10.47</td>
+<td>22.89</td>
+<td>12.76</td>
+<td>10.47</td>
+<td>21.38</td>
+<td>17.65</td>
+<td>13.52</td>
+<td>19.36</td>
+<td>11.98</td>
+<td>16.10</td>
+<td>15.59</td>
+<td>14.94</td>
+<td>9.29</td>
+<td>15.59</td>
+<td>19.03</td>
+<td>14.44</td>
+<td>14.53</td>
+<td>14.31</td>
+<td>11.31</td>
+<td>11.97</td>
+<td>9.72</td>
+<td>9.69</td>
+        </tr>
+<tr>
+            <td>ITM</td>
+<td>62.14</td>
+<td>58.21</td>
+<td>51.81</td>
+<td>63.89</td>
+<td>62.97</td>
+<td>57.05</td>
+<td>63.72</td>
+<td>60.89</td>
+<td>53.74</td>
+<td>63.36</td>
+<td>62.09</td>
+<td>56.91</td>
+<td>63.25</td>
+<td>60.40</td>
+<td>55.90</td>
+<td>63.25</td>
+<td>62.04</td>
+<td>57.69</td>
+<td>63.21</td>
+<td>61.40</td>
+<td>53.72</td>
+<td>62.63</td>
+<td>58.70</td>
+<td>56.19</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="25">Panel B: Performance of Models According to Time-to-Maturity</th>
+        </tr>
+<tr>
+            <th rowspan="2"></th>
+            <th colspan="3">IMPLIED</th>
+            <th colspan="3">GARCH</th>
+            <th colspan="3">HIS360</th>
+            <th colspan="3">HIS30</th>
+            <th colspan="3">HIS10</th>
+            <th colspan="3">HIS21</th>
+            <th colspan="3">HIS252</th>
+            <th colspan="3">VBI</th>
+        </tr>
+<tr>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>SHORT</td>
+<td>16.58</td>
+<td>16.43</td>
+<td>16.01</td>
+<td>18.07</td>
+<td>17.98</td>
+<td>17.58</td>
+<td>18.42</td>
+<td>22.21</td>
+<td>19.55</td>
+<td>19.55</td>
+<td>20.89</td>
+<td>16.56</td>
+<td>18.42</td>
+<td>18.71</td>
+<td>20.09</td>
+<td>18.42</td>
+<td>21.49</td>
+<td>20.09</td>
+<td>16.97</td>
+<td>20.85</td>
+<td>16.71</td>
+<td>16.73</td>
+<td>16.68</td>
+<td>16.63</td>
+        </tr>
+<tr>
+            <td>MEDIUM</td>
+<td>16.45</td>
+<td>14.91</td>
+<td>12.16</td>
+<td>29.09</td>
+<td>15.60</td>
+<td>12.77</td>
+<td>26.95</td>
+<td>16.50</td>
+<td>13.42</td>
+<td>13.42</td>
+<td>17.06</td>
+<td>13.21</td>
+<td>21.45</td>
+<td>17.69</td>
+<td>15.67</td>
+<td>21.45</td>
+<td>18.63</td>
+<td>15.67</td>
+<td>19.14</td>
+<td>13.97</td>
+<td>13.26</td>
+<td>16.84</td>
+<td>14.23</td>
+<td>12.78</td>
+        </tr>
+<tr>
+            <td>LONG</td>
+<td>12.21</td>
+<td>15.15</td>
+<td>10.88</td>
+<td>46.15</td>
+<td>11.40</td>
+<td>9.43</td>
+<td>42.89</td>
+<td>14.82</td>
+<td>9.51</td>
+<td>9.51</td>
+<td>14.28</td>
+<td>9.15</td>
+<td>29.25</td>
+<td>21.96</td>
+<td>11.02</td>
+<td>29.25</td>
+<td>15.86</td>
+<td>11.02</td>
+<td>28.40</td>
+<td>11.96</td>
+<td>22.64</td>
+<td>24.84</td>
+<td>8.65</td>
+<td>13.25</td>
+        </tr>
+    </tbody>
+</table>
+
+Notes: NN1 and NN2 represent neural network models whose inputs and outputs are stated in Equations (5) and (6), respectively. BS is the Black-Scholes option pricing model. IMPLIED, GARCH, HIS360, HIS30, HIS10, HIS21, HIS252, and VBI represent $\hat{\sigma}_{t}^{implied}$, $\hat{\sigma}_{t}^{garch}$, $\hat{\sigma}_{t}^{360}$, $\hat{\sigma}_{t}^{30}$, $\hat{\sigma}_{t}^{10}$, $\hat{\sigma}_{t}^{21}$, $\hat{\sigma}_{t}^{252}$, and $\hat{\sigma}_{t}^{vbi}$, respectively. * pricing error of the best model estimated with a certain volatility forecast, such as ARCH, is statistically significant compared with the pricing errors of the other two models according to the Diebold-Mariano test at the 5 percent level. The superscript numbers represent the rank of the best model based on one volatility forecasting approach compared to the other best models, based on other volatility forecasting approaches. For instance, for OTM options, the rank of the models is as follows: 1. NN2 with implied volatility, 2. NN2 with GARCH volatility, 3. NN1 with the historical volatility estimated with 30-day data, 4. NN2 with VBI, 5. NN2 with the historical volatility estimated with 10-day data, 6. NN1 with the historical volatility estimated with 252-day data, 7. NN2 with the historical volatility estimated with 21-day data, and 8. NN1 with the historical volatility estimated with 360-day data. That is, for OTM options, the best model is NN2, when the GARCH volatility forecast is used in pricing options, and it ranks second among other best models when different volatility forecasts are used, which is represented by a superscript 2, whereas the NN1 is the best model when the historical volatility forecast based on past 360-day data is used, and its rank is eight, as shown by a superscript 8 among the other best models when other volatility forecasts are used.
+
+729
+
+---
+
+
+
+Z. İltüzer
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th colspan="2">IMPLIED</th>
+<th colspan="2">GARCH</th>
+<th colspan="2">HIS360</th>
+<th colspan="2">HIS30</th>
+<th colspan="2">HIS10</th>
+<th colspan="2">HIS21</th>
+<th colspan="2">HIS252</th>
+<th colspan="2">VBI</th>
+</tr>
+<tr>
+<th></th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+<th>BS</th>
+<th>NN1</th>
+<th>NN2</th>
+</tr>
+<tr>
+<td>OTM</td>
+<td>0.67</td>
+<td>0.65</td>
+<td>0.58</td>
+<td>0.56</td>
+<td>0.45</td>
+<td>0.64</td>
+<td>0.55</td>
+<td>0.79</td>
+<td>0.52</td>
+<td>0.49</td>
+<td>0.36</td>
+<td>0.41</td>
+<td>0.37</td>
+<td>0.41</td>
+<td>0.93</td>
+<td>0.72</td>
+<td>0.72</td>
+</tr>
+<tr>
+<td>ATM</td>
+<td>0.84</td>
+<td>0.94</td>
+<td>0.85</td>
+<td>0.84</td>
+<td>0.77</td>
+<td>1.12</td>
+<td>1.05</td>
+<td>0.65</td>
+<td>0.73</td>
+<td>1.04</td>
+<td>0.65</td>
+<td>0.81</td>
+<td>0.63</td>
+<td>0.81</td>
+<td>1.86</td>
+<td>1.02</td>
+<td>0.87</td>
+</tr>
+<tr>
+<td>ITM</td>
+<td>2.02</td>
+<td>2.34</td>
+<td>2.10</td>
+<td>2.02</td>
+<td>2.01</td>
+<td>1.84</td>
+<td>1.58</td>
+<td>1.92</td>
+<td>2.05</td>
+<td>1.85</td>
+<td>2.03</td>
+<td>1.82</td>
+<td>2.00</td>
+<td>1.82</td>
+<td>2.58</td>
+<td>2.02</td>
+<td>1.99</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="18">Panel B: Performance of Models According to Time-to-Maturity</td>
+</tr>
+<tr>
+<td>SHORT</td>
+<td>0.55</td>
+<td>0.69</td>
+<td>0.77</td>
+<td>0.55</td>
+<td>0.85</td>
+<td>0.54</td>
+<td>0.93</td>
+<td>0.74</td>
+<td>0.65</td>
+<td>0.83</td>
+<td>0.57</td>
+<td>0.59</td>
+<td>0.54</td>
+<td>0.59</td>
+<td>1.39</td>
+<td>0.61</td>
+<td>0.77</td>
+</tr>
+<tr>
+<td>MEDIUM</td>
+<td>1.11</td>
+<td>1.05</td>
+<td>0.83</td>
+<td>1.05</td>
+<td>1.19</td>
+<td>0.91</td>
+<td>0.62</td>
+<td>0.73</td>
+<td>1.65</td>
+<td>1.01</td>
+<td>0.69</td>
+<td>0.80</td>
+<td>0.69</td>
+<td>0.80</td>
+<td>1.50</td>
+<td>1.28</td>
+<td>0.71</td>
+</tr>
+<tr>
+<td>LONG</td>
+<td>2.02</td>
+<td>3.23</td>
+<td>2.79</td>
+<td>0.51</td>
+<td>1.78</td>
+<td>0.42</td>
+<td>3.07</td>
+<td>1.21</td>
+<td>2.83</td>
+<td>1.48</td>
+<td>0.19</td>
+<td>1.72</td>
+<td>1.45</td>
+<td>1.72</td>
+<td>4.00</td>
+<td>2.40</td>
+<td>5.15</td>
+</tr>
+<tr>
+<td colspan="18"><b>Notes:</b> NN1 and NN2 represent the neural network models whose inputs and outputs are stated in Equations <sup>(5)</sup> and <sup>(6)</sup>, respectively. BS is the Black-Scholes option pricing model. IMPLIED, GARCH, HIS360, HIS30, HIS10, HIS21, HIS252, and VBI represent $\hat{\sigma}^{implied}_{t}$, $\hat{\sigma}^{garch}_{t}$, $\hat{\sigma}^{360}_{t}$, $\hat{\sigma}^{30}_{t}$, $\hat{\sigma}^{10}_{t}$, $\hat{\sigma}^{21}_{t}$, and $\hat{\sigma}^{252}_{t}$, respectively. * pricing error of the best model estimated with a certain volatility forecast, such as ARCH, is statistically significant based on the pricing errors of the other two models according to the Diebold-Mariano test at the 5 percent level. For instance, for OTM options, the rank of the models is as follows: 1. BS with 30-day historical volatility forecasting approach compared to the other best models based on other volatility forecasting approaches. 3. BS with 252-day historical volatility. 4. BS with 360-day historical volatility. 5. NN2 with 10-day historical volatility. 6. BS with GARCH volatility. 7. NN2 with implied volatility. 8. BS with VBI. That is, for OTM options, the best model is BS when the 21-day historical volatility forecast is used in pricing the options, and it ranks second among other best models when different volatility forecasts are used, which is represented by a superscript 2, while BS is the best model when other volatility forecasts are used.</td>
+</tr>
+</tbody>
+</table>
+
+Figs. 2 and 3 depict the pricing errors, $c - \hat{c}$, of the models according to the moneyness dimension for the full sample and subsample, respectively, and <u>Figs. 4 and 5</u> show the pricing errors of the models according to the time-to-maturity dimension for the full sample and subsample, respectively.
+
+The figures demonstrate the behavior of the models at different moneyness levels and at various times to maturity when different volatility forecasting approaches are used. Most of the models have bias that either overprice or under-price the call options. The BS model with implied volatility underprices ATM and OTM options whereas NN2 with implied volatility overprices ATM options. BS and NN1 with GARCH volatility, BS and NN1 with historical volatility based on the prior 360 days of data, BS with historical volatility estimated by data for the past 30 and ten days, NN1 with historical volatility estimated by the most recent ten days of data tend to underprice OTM, ATM, and ITM call options most of the time.
+
+By contrast, NN2 with historical volatility estimated by the past 30 and 360 days of data overprices OTM and ATM call options; BS with historical volatility estimated by the past 21 and 252 trading days of data tend to overprice ATM and OTM options; NN2 with historical volatility estimated by the past 21 trading days of data and with VBI tend to overprice OTM, ATM, and ITM call options; and NN1 with VBI tends to overprice OTM options. In short, BS is biased toward underpricing ATM and OTM call options with almost every volatility input, whereas NN1 and NN2 do not have such consistent underpricing or overpricing bias with different volatility estimates. The NN1 and NN2 models tend to overprice call options with some volatility inputs but to underprice with other volatility inputs. The results in <u>Table 1</u> and <u>Fig. 2</u> together indicate that NN2 with historical volatility estimated by using the past 10 days of data is the best model for ATM call options, but the model tends to overprice the options. Therefore, it is important for practitioners to take into account the effect of this overpricing behavior on their investment or hedging strategies.
+
+As Turkey is an emerging market and a developing country, its derivatives market and ecosystem are still at an early stage of development, shown by the low trading volume and the use of the BS model to price options, and the majority of market participants lack the education background to employ complex and advanced option pricing models. Therefore, the systemic underpricing of the BS model might be due to the fact that market participants who use it add a model risk premium to the price calculated when placing their order. The same underpricing pattern in BS models as in the full-sample analysis is found in the subsample results in <u>Fig. 3</u> according to the moneyness dimension. However, the consistent overpricing behavior of the NN1 and NN2 model with every volatility forecast approach for ATM and/or OTM options is not found in the full-sample analysis, which implies that NN option pricing models tend to overprice call options during periods of turmoil.
+
+<u>Figs. 4 and 5</u> illustrate the pricing errors of the models according to the time-to-maturity dimension in the full-
+
+730
+
+---
+
+*Z. İltüzer*
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Pricing errors of BS, NN1, and NN2 models under different volatility forecasting approaches — x-axis: Pricing Error; y-axis: Moneyness (ITM, ATM, OTM)
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th colspan="3">Model</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>$\hat{\sigma}_t^{implied}$</th>
+      <td>(a) BS($\hat{\sigma}_t^{implied}$)</td>
+<td>(b) NN1($\hat{\sigma}_t^{implied}$)</td>
+<td>(c) NN2($\hat{\sigma}_t^{implied}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{garch}$</th>
+      <td>(d) BS($\hat{\sigma}_t^{garch}$)</td>
+<td>(e) NN1($\hat{\sigma}_t^{garch}$)</td>
+<td>(f) NN2($\hat{\sigma}_t^{garch}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{360}$</th>
+      <td>(g) BS($\hat{\sigma}_t^{360}$)</td>
+<td>(h) NN1($\hat{\sigma}_t^{360}$)</td>
+<td>(i) NN2($\hat{\sigma}_t^{360}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{30}$</th>
+      <td>(j) BS($\hat{\sigma}_t^{30}$)</td>
+<td>(k) NN1($\hat{\sigma}_t^{30}$)</td>
+<td>(l) NN2($\hat{\sigma}_t^{30}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{10}$</th>
+      <td>(m) BS($\hat{\sigma}_t^{10}$)</td>
+<td>(n) NN1($\hat{\sigma}_t^{10}$)</td>
+<td>(o) NN2($\hat{\sigma}_t^{10}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{21}$</th>
+      <td>(p) BS($\hat{\sigma}_t^{21}$)</td>
+<td>(q) NN1($\hat{\sigma}_t^{21}$)</td>
+<td>(r) NN2($\hat{\sigma}_t^{21}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{252}$</th>
+      <td>(s) BS($\hat{\sigma}_t^{252}$)</td>
+<td>(t) NN1($\hat{\sigma}_t^{252}$)</td>
+<td>(u) NN2($\hat{\sigma}_t^{252}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{vbi}$</th>
+      <td>(v) BS($\hat{\sigma}_t^{vbi}$)</td>
+<td>(w) NN1($\hat{\sigma}_t^{vbi}$)</td>
+<td>(x) NN2($\hat{\sigma}_t^{vbi}$)</td>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 2. Pricing errors of models according to moneyness for call options: Full sample.
+
+731
+
+---
+
+Z. İltüzer
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+### Pricing errors of BIST 30 index options by model and volatility forecasting approach — panels (a) through (x)
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th rowspan="2">Moneyness</th>
+      <th colspan="3">Pricing Error (x-axis) by Model</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3">(a, b, c) $\hat{\sigma}_t^{implied}$</th>
+      <th>ITM</th>
+      <td>-2.0, -1.5, 0.0, 0.5, 4.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.5</td>
+<td>-2.5, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 3.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(d, e, f) $\hat{\sigma}_t^{garch}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(g, h, i) $\hat{\sigma}_t^{360}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 3.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5</td>
+<td>-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 2.5, 5.0</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(j, k, l) $\hat{\sigma}_t^{30}$</th>
+      <th>ITM</th>
+      <td>-2.5, -2.0, 0.0, 1.0, 4.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 3.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0, 3.0, 4.5</td>
+<td>-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.5</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 2.5</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(m, n, o) $\hat{\sigma}_t^{10}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0</td>
+<td>-4.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 3.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 2.5</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(p, q, r) $\hat{\sigma}_t^{21}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0, 6.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 3.0, 5.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+<td>-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.5</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0, 3.0, 4.0, 5.0, 7.5</td>
+    </tr>
+<tr>
+      <th rowspan="3">(s, t, u) $\hat{\sigma}_t^{252}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-2.0, -1.5, 0.0, 1.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-4.0, -3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0, 3.0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(v, w, x) $\hat{\sigma}_t^{vbi}$</th>
+      <th>ITM</th>
+      <td>-1.0, 0.0, 1.0, 4.0</td>
+<td>-4.0, -3.0, -2.0, -1.0, 0.0, 1.0, 2.5</td>
+<td>-3.5, -2.0, -1.0, 0.0, 1.0, 3.0</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-0.5, 0.0, 0.5, 2.0, 4.0</td>
+<td>-3.5, -3.0, -2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+<td>-2.5, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-0.5, 0.0, 0.5, 1.5, 3.0</td>
+<td>-1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 2.5</td>
+<td>-1.0, -0.5, 0.0, 0.5, 1.0, 2.0</td>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 3. Pricing errors of models according to moneyness for call options: Subsample.
+
+732
+
+---
+
+
+
+Z. İltüzer
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Model</th>
+<th>x-axis range</th>
+<th>y-axis range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(a)</td>
+<td>BS($\hat{\sigma}_t^{implied}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(b)</td>
+<td>NN1 ($\hat{\sigma}_t^{implied}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(c)</td>
+<td>NN2 ($\hat{\sigma}_t^{implied}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(d)</td>
+<td>BS($\hat{\sigma}_t^{garch}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(e)</td>
+<td>NN1 ($\hat{\sigma}_t^{garch}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(f)</td>
+<td>NN2 ($\hat{\sigma}_t^{garch}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(g)</td>
+<td>BS($\hat{\sigma}_t^{360}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(h)</td>
+<td>NN1 ($\hat{\sigma}_t^{360}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(i)</td>
+<td>NN2 ($\hat{\sigma}_t^{360}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(j)</td>
+<td>BS($\hat{\sigma}_t^{30}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(k)</td>
+<td>NN1 ($\hat{\sigma}_t^{30}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(l)</td>
+<td>NN2 ($\hat{\sigma}_t^{30}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(m)</td>
+<td>BS($\hat{\sigma}_t^{10}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(n)</td>
+<td>NN1 ($\hat{\sigma}_t^{10}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(o)</td>
+<td>NN2 ($\hat{\sigma}_t^{10}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(p)</td>
+<td>BS($\hat{\sigma}_t^{21}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(q)</td>
+<td>NN1 ($\hat{\sigma}_t^{21}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(r)</td>
+<td>NN2 ($\hat{\sigma}_t^{21}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(s)</td>
+<td>BS($\hat{\sigma}_t^{252}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(t)</td>
+<td>NN1 ($\hat{\sigma}_t^{252}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(u)</td>
+<td>NN2 ($\hat{\sigma}_t^{252}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(v)</td>
+<td>BS($\hat{\sigma}_t^{pbi}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(w)</td>
+<td>NN1 ($\hat{\sigma}_t^{pbi}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+<tr>
+<td>(x)</td>
+<td>NN2 ($\hat{\sigma}_t^{pbi}$)</td>
+<td>-100 to 100</td>
+<td>-100 to 140</td>
+</tr>
+</tbody>
+</table>
+
+Fig. 4. Pricing errors of models according to time-to-maturity for call options: Full sample.
+
+733
+
+---
+
+*Z. İltüzer*
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Pricing errors by moneyness and volatility forecasting approach — panels (a) through (x)
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th colspan="3">Model</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>$\hat{\sigma}_t^{implied}$</th>
+      <td>(a) BS($\hat{\sigma}_t^{implied}$)</td>
+<td>(b) NN1($\hat{\sigma}_t^{implied}$)</td>
+<td>(c) NN2($\hat{\sigma}_t^{implied}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{garch}$</th>
+      <td>(d) BS($\hat{\sigma}_t^{garch}$)</td>
+<td>(e) NN1($\hat{\sigma}_t^{garch}$)</td>
+<td>(f) NN2($\hat{\sigma}_t^{garch}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{360}$</th>
+      <td>(g) BS($\hat{\sigma}_t^{360}$)</td>
+<td>(h) NN1($\hat{\sigma}_t^{360}$)</td>
+<td>(i) NN2($\hat{\sigma}_t^{360}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{30}$</th>
+      <td>(j) BS($\hat{\sigma}_t^{30}$)</td>
+<td>(k) NN1($\hat{\sigma}_t^{30}$)</td>
+<td>(l) NN2($\hat{\sigma}_t^{30}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{10}$</th>
+      <td>(m) BS($\hat{\sigma}_t^{10}$)</td>
+<td>(n) NN1($\hat{\sigma}_t^{10}$)</td>
+<td>(o) NN2($\hat{\sigma}_t^{10}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{21}$</th>
+      <td>(p) BS($\hat{\sigma}_t^{21}$)</td>
+<td>(q) NN1($\hat{\sigma}_t^{21}$)</td>
+<td>(r) NN2($\hat{\sigma}_t^{21}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{252}$</th>
+      <td>(s) BS($\hat{\sigma}_t^{252}$)</td>
+<td>(t) NN1($\hat{\sigma}_t^{252}$)</td>
+<td>(u) NN2($\hat{\sigma}_t^{252}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{vbi}$</th>
+      <td>(v) BS($\hat{\sigma}_t^{vbi}$)</td>
+<td>(w) NN1($\hat{\sigma}_t^{vbi}$)</td>
+<td>(x) NN2($\hat{\sigma}_t^{vbi}$)</td>
+    </tr>
+  </tbody>
+</table>
+
+### Pricing error distribution by moneyness — y-axis: Pricing Error; x-axis: Time-to-maturity
+
+<table>
+  <thead>
+    <tr>
+      <th>Moneyness (y-axis label)</th>
+      <th>Pricing Error Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ITM</th>
+      <td>140</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>90</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>30</td>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 5. Pricing errors of models according to time-to-maturity for call options: Subsample.
+
+734
+
+---
+
+Z. iltüzer
+
+Table 3
+Out-of-sample RMSEs of models for put options - full sample.
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="25">Panel A: Performance of Models According to Moneyness</th>
+        </tr>
+<tr>
+            <th></th>
+            <th colspan="3">IMPLIED</th>
+            <th colspan="3">GARCH</th>
+            <th colspan="3">HIS360</th>
+            <th colspan="3">HIS30</th>
+            <th colspan="3">HIS10</th>
+            <th colspan="3">HIS21</th>
+            <th colspan="3">HIS252</th>
+            <th colspan="3">VBI</th>
+        </tr>
+<tr>
+            <th></th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+            <th>BS</th>
+            <th>NN1</th>
+            <th>NN2</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>OTM</td>
+<td>27.01<sup>7</sup></td>
+<td>26.31</td>
+<td>23.86</td>
+<td>24.66<sup>8</sup></td>
+<td>53.88</td>
+<td>38.29</td>
+<td>13.34<sup>1</sup>*</td>
+<td>36.42</td>
+<td>19.29</td>
+<td>23.67<sup>4</sup></td>
+<td>48.45</td>
+<td>18.46</td>
+<td>18.78<sup>6</sup></td>
+<td>29.44</td>
+<td>21.56</td>
+<td>18.78<sup>6</sup></td>
+<td>36.95</td>
+<td>23.55</td>
+<td>18.31<sup>3</sup></td>
+<td>35.44</td>
+<td>20.05</td>
+<td>16.52<sup>2</sup></td>
+<td>24.73</td>
+<td>17.28</td>
+        </tr>
+<tr>
+            <td>ATM</td>
+<td>23.20</td>
+<td>14.79<sup>6</sup></td>
+<td>14.64</td>
+<td>15.45</td>
+<td>20.59</td>
+<td>16.24<sup>8</sup></td>
+<td>8.89<sup>1</sup>*</td>
+<td>14.66</td>
+<td>11.10</td>
+<td>20.16</td>
+<td>27.25</td>
+<td>13.92<sup>5</sup></td>
+<td>16.14</td>
+<td>20.03</td>
+<td>12.29<sup>3</sup></td>
+<td>16.14</td>
+<td>23.44</td>
+<td>14.99<sup>7</sup></td>
+<td>13.70<sup>2</sup></td>
+<td>18.89</td>
+<td>11.93</td>
+<td>13.97</td>
+<td>16.13</td>
+<td>13.42<sup>4</sup></td>
+        </tr>
+<tr>
+            <td>ITM</td>
+<td>19.86</td>
+<td>10.19<sup>4</sup></td>
+<td>13.40</td>
+<td>17.90</td>
+<td>14.81</td>
+<td>14.73<sup>8</sup></td>
+<td>7.69<sup>1</sup>*</td>
+<td>8.84</td>
+<td>8.87</td>
+<td>17.85</td>
+<td>12.66</td>
+<td>9.67<sup>5</sup></td>
+<td>13.60</td>
+<td>13.45</td>
+<td>12.16<sup>7</sup></td>
+<td>13.60</td>
+<td>12.00<sup>6</sup></td>
+<td>15.03</td>
+<td>14.11</td>
+<td>12.44</td>
+<td>10.66<sup>3</sup></td>
+<td>13.00</td>
+<td>12.19</td>
+<td>8.87<sup>2</sup></td>
+        </tr>
+<tr>
+            <th colspan="25">Panel B: Performance of Models According to Time-To-Maturity</th>
+        </tr>
+<tr>
+            <td>SHORT</td>
+<td>10.94<sup>5</sup></td>
+<td>11.56</td>
+<td>15.31</td>
+<td>7.11<sup>2</sup></td>
+<td>13.38</td>
+<td>15.60</td>
+<td>7.13<sup>3</sup></td>
+<td>12.28</td>
+<td>14.20</td>
+<td>12.56</td>
+<td>20.70</td>
+<td>12.24<sup>7</sup></td>
+<td>8.51<sup>4</sup></td>
+<td>11.72</td>
+<td>11.92</td>
+<td>8.51<sup>4</sup></td>
+<td>14.61</td>
+<td>13.56</td>
+<td>7.96<sup>6</sup></td>
+<td>9.36</td>
+<td>13.06</td>
+<td>6.85<sup>1</sup>*</td>
+<td>14.24</td>
+<td>10.38</td>
+        </tr>
+<tr>
+            <td>MEDIUM</td>
+<td>25.29</td>
+<td>16.91</td>
+<td>15.82<sup>7</sup></td>
+<td>20.35</td>
+<td>35.20</td>
+<td>25.24<sup>8</sup></td>
+<td>9.98<sup>1</sup>*</td>
+<td>16.90</td>
+<td>11.27</td>
+<td>21.51</td>
+<td>29.57</td>
+<td>14.02<sup>4</sup></td>
+<td>16.98</td>
+<td>18.73</td>
+<td>14.96<sup>6</sup></td>
+<td>16.98</td>
+<td>24.21</td>
+<td>17.41<sup>5</sup></td>
+<td>15.47</td>
+<td>20.40</td>
+<td>13.04<sup>2</sup></td>
+<td>15.31</td>
+<td>15.41</td>
+<td>14.03<sup>3</sup></td>
+        </tr>
+<tr>
+            <td>LONG</td>
+<td>42.28</td>
+<td>29.42</td>
+<td>23.92<sup>6</sup></td>
+<td>33.70</td>
+<td>38.55</td>
+<td>25.18<sup>7</sup></td>
+<td>15.41</td>
+<td>45.47</td>
+<td>11.92<sup>1</sup>*</td>
+<td>35.36</td>
+<td>54.66</td>
+<td>19.24<sup>5</sup></td>
+<td>30.05</td>
+<td>46.77</td>
+<td>20.96<sup>8</sup></td>
+<td>30.05</td>
+<td>48.06</td>
+<td>25.95<sup>4</sup></td>
+<td>28.40</td>
+<td>50.30</td>
+<td>18.00<sup>2</sup></td>
+<td>26.82</td>
+<td>32.49</td>
+<td>18.36<sup>3</sup></td>
+        </tr>
+    </tbody>
+</table>
+
+Notes: NN1 and NN2 represent the neural network models whose inputs and outputs are stated in Equations (5) and (6), respectively. BS is the Black-Scholes option pricing model. IMPLIED, GARCH, HIS360, HIS30, HIS10, HIS21, HIS252, and VBI represent σ̂<sub>t</sub><sup>implied</sup>, σ̂<sub>t</sub><sup>garch</sup>, σ̂<sub>t</sub><sup>360</sup>, σ̂<sub>t</sub><sup>30</sup>, σ̂<sub>t</sub><sup>10</sup>, σ̂<sub>t</sub><sup>21</sup>, σ̂<sub>t</sub><sup>252</sup>, and σ̂<sub>t</sub><sup>vbi</sup>, respectively. * pricing error of the best model estimated with a certain volatility forecast, such as ARCH, is statistically significant based on the pricing errors of the other two models according to the Diebold-Mariano test at the 5 percent level. The superscript numbers represent the rank of the best model based on one volatility forecasting approach compared to the other best models based on other volatility forecasting approaches. For instance, for OTM options, the rank of the models is as follows: 1. BS with 360-day historical volatility, 2. BS with VBI, 3. BS with 252-day historical volatility, 4. BS with 30-day historical volatility, 5. NN2 with 10-day historical volatility, 6. BS with 21-day historical volatility, 7. BS with implied volatility, and 8. BS with GARCH. That is, for OTM options, the best model is BS when VBI is used in pricing the options, and it ranks second among other best models when different volatility forecasts are used, which is represented by a superscript 2, while BS is the best model when the historical volatility forecast based on the past 30 days of data is used, and its rank is four, represented by a superscript 4 among the other best models when other volatility forecasts are used.
+
+735
+
+Table 4
+Out-of-sample RMSEs of models for put options - subsample.
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="25">Panel A: Performance of Models According to Moneyness</th>
+    </tr>
+<tr>
+      <th></th>
+      <th colspan="3">IMPLIED</th>
+      <th colspan="3">GARCH</th>
+      <th colspan="3">HIS360</th>
+      <th colspan="3">HIS30</th>
+      <th colspan="3">HIS10</th>
+      <th colspan="3">HIS21</th>
+      <th colspan="3">HIS252</th>
+      <th colspan="3">VBI</th>
+    </tr>
+<tr>
+      <th></th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>OTM</td>
+<td>1.22<sup>3</sup></td>
+<td>1.22</td>
+<td>2.36</td>
+<td>1.20<sup>2</sup></td>
+<td>1.27</td>
+<td>2.36</td>
+<td>1.25<sup>4</sup></td>
+<td>1.37</td>
+<td>2.59</td>
+<td>1.55<sup>8</sup></td>
+<td>1.65</td>
+<td>2.54</td>
+<td>1.51<sup>5</sup></td>
+<td>1.30</td>
+<td>2.54</td>
+<td>1.55<sup>7</sup></td>
+<td>1.78</td>
+<td>3.02</td>
+<td>1.63</td>
+<td>1.47<sup>6</sup></td>
+<td>2.74</td>
+<td>1.04<sup>1</sup></td>
+<td>1.30</td>
+<td>1.80</td>
+    </tr>
+<tr>
+      <td>ATM</td>
+<td>0.60<sup>1</sup></td>
+<td>0.60</td>
+<td>0.72</td>
+<td>0.84</td>
+<td>0.62<sup>3</sup></td>
+<td>0.66</td>
+<td>0.93</td>
+<td>0.59<sup>2</sup></td>
+<td>0.63</td>
+<td>1.13</td>
+<td>0.91</td>
+<td>0.79<sup>8</sup></td>
+<td>1.09</td>
+<td>0.73<sup>7</sup></td>
+<td>0.76</td>
+<td>1.13</td>
+<td>0.90</td>
+<td>0.92</td>
+<td>1.31</td>
+<td>0.83</td>
+<td>0.68<sup>6</sup></td>
+<td>0.71</td>
+<td>0.63<sup>4</sup></td>
+<td>0.67<sup>5</sup></td>
+    </tr>
+<tr>
+      <td>ITM</td>
+<td>0.59<sup>5</sup></td>
+<td>0.59</td>
+<td>0.54<sup>4</sup></td>
+<td>1.12</td>
+<td>0.77</td>
+<td>0.55<sup>6</sup></td>
+<td>1.19</td>
+<td>0.45</td>
+<td>0.37<sup>1</sup></td>
+<td>1.52</td>
+<td>1.01</td>
+<td>0.48<sup>3</sup></td>
+<td>1.24</td>
+<td>0.70</td>
+<td>0.49</td>
+<td>1.52</td>
+<td>1.18</td>
+<td>0.73</td>
+<td>1.52</td>
+<td>0.84</td>
+<td>0.42<sup>2</sup></td>
+<td>0.98</td>
+<td>0.70</td>
+<td>0.58<sup>7</sup></td>
+    </tr>
+<tr>
+      <th colspan="25">Panel B: Performance of Models According to Time-To-Maturity</th>
+    </tr>
+<tr>
+      <td>SHORT</td>
+<td>0.87</td>
+<td>0.65<sup>3</sup></td>
+<td>1.35</td>
+<td>0.71<sup>5</sup></td>
+<td>0.73</td>
+<td>1.33</td>
+<td>0.70<sup>4</sup></td>
+<td>0.71</td>
+<td>1.30</td>
+<td>0.93</td>
+<td>1.02</td>
+<td>1.30</td>
+<td>0.90</td>
+<td>0.78<sup>7</sup></td>
+<td>1.45</td>
+<td>0.93</td>
+<td>1.09</td>
+<td>1.48</td>
+<td>0.94</td>
+<td>0.96<sup>8</sup></td>
+<td>1.51</td>
+<td>0.60<sup>1</sup></td>
+<td>0.78<sup>6</sup></td>
+<td>1.03<sup>2</sup></td>
+    </tr>
+<tr>
+      <td>MEDIUM</td>
+<td>1.69</td>
+<td>0.86<sup>6</sup></td>
+<td>0.76<sup>3</sup></td>
+<td>1.25</td>
+<td>0.88</td>
+<td>0.71<sup>1</sup></td>
+<td>1.40</td>
+<td>0.82<sup>4</sup></td>
+<td>0.97</td>
+<td>1.69</td>
+<td>1.17</td>
+<td>1.12</td>
+<td>1.54</td>
+<td>0.93<sup>8</sup></td>
+<td>0.77<sup>5</sup></td>
+<td>1.69</td>
+<td>1.23</td>
+<td>1.45</td>
+<td>1.90</td>
+<td>0.98</td>
+<td>0.72<sup>2</sup></td>
+<td>1.08</td>
+<td>0.80<sup>7</sup></td>
+<td>0.79</td>
+    </tr>
+<tr>
+      <td>LONG</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+<td>–</td>
+    </tr>
+  </tbody>
+</table>
+
+Notes: NN1 and NN2 represent the neural network models whose inputs and outputs are stated in Equations (5) and (6), respectively. BS is the Black-Scholes option pricing model. IMPLIED, GARCH, HIS360, HIS30, HIS10, HIS21, HIS252, and VBI represent σ̂<sub>t</sub><sup>implied</sup>, σ̂<sub>t</sub><sup>garch</sup>, σ̂<sub>t</sub><sup>360</sup>, σ̂<sub>t</sub><sup>30</sup>, σ̂<sub>t</sub><sup>10</sup>, σ̂<sub>t</sub><sup>21</sup>, σ̂<sub>t</sub><sup>252</sup>, and σ̂<sub>t</sub><sup>vbi</sup>, respectively. * pricing error of the best model estimated with a certain volatility forecast, such as ARCH, is statistically significant based on the pricing errors of the other two models according to the Diebold-Mariano test at the 5 percent level. The superscript numbers represent the rank of the best model based on one volatility forecasting approach compared to the other best models based on other volatility forecasting approaches. For instance, for OTM options, the rank of the models is as follows: 1. BS with VBI, 2. BS with GARCH, 3. BS with implied volatility, 4. BS with 360-day historical volatility, 5. BS with 10-day historical volatility, 6. NN1 with 252-day historical volatility, 7. BS with 21-day historical volatility, and 8. BS with 30-day historical volatility. That is, for OTM options, the best model is BS when GARCH volatility forecast is used in pricing the options, and it ranks second among other best models when different volatility forecasts are used, which is represented by a superscript 2, while BS is the best model when the historical volatility forecast based on the past 360 days of data is used, and its rank is four represented by a superscript 4 among the other best models when other volatility forecasts are used.
+
+*Borsa İstanbul Review* 22-4 (2022) 725–742
+
+---
+
+*Z. İltüzer* *Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Pricing errors for different models and volatility forecasting methods across moneyness categories — panels (a) through (x)
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Method</th>
+      <th rowspan="2">Moneyness</th>
+      <th colspan="3">Model Pricing Error Range (approximate)</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3">Implied ($\hat{\sigma}_t^{implied}$)</th>
+      <th>ITM</th>
+      <td>(a) -25 to 50</td>
+<td>(b) -25 to 25</td>
+<td>(c) -25 to 50</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(a) -50 to 50</td>
+<td>(b) -25 to 25</td>
+<td>(c) -40 to 50</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(a) -25 to 50</td>
+<td>(b) -75 to 25</td>
+<td>(c) -50 to 50</td>
+    </tr>
+<tr>
+      <th rowspan="3">GARCH ($\hat{\sigma}_t^{garch}$)</th>
+      <th>ITM</th>
+      <td>(d) -50 to 75</td>
+<td>(e) -50 to 50</td>
+<td>(f) -50 to 50</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(d) -50 to 100</td>
+<td>(e) -75 to 75</td>
+<td>(f) -75 to 75</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(d) -50 to 100</td>
+<td>(e) -100 to 50</td>
+<td>(f) -100 to 100</td>
+    </tr>
+<tr>
+      <th rowspan="3">360-day ($\hat{\sigma}_t^{360}$)</th>
+      <th>ITM</th>
+      <td>(g) -25 to 50</td>
+<td>(h) -25 to 25</td>
+<td>(i) -25 to 25</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(g) -75 to 75</td>
+<td>(h) -50 to 50</td>
+<td>(i) -50 to 50</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(g) -50 to 75</td>
+<td>(h) -100 to 100</td>
+<td>(i) -50 to 50</td>
+    </tr>
+<tr>
+      <th rowspan="3">30-day ($\hat{\sigma}_t^{30}$)</th>
+      <th>ITM</th>
+      <td>(j) -50 to 75</td>
+<td>(k) -50 to 50</td>
+<td>(l) -25 to 25</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(j) -100 to 100</td>
+<td>(k) -75 to 75</td>
+<td>(l) -75 to 75</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(j) -75 to 100</td>
+<td>(k) -100 to 100</td>
+<td>(l) -75 to 75</td>
+    </tr>
+<tr>
+      <th rowspan="3">10-day ($\hat{\sigma}_t^{10}$)</th>
+      <th>ITM</th>
+      <td>(m) -50 to 50</td>
+<td>(n) -50 to 50</td>
+<td>(o) -25 to 50</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(m) -100 to 75</td>
+<td>(n) -75 to 75</td>
+<td>(o) -75 to 75</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(m) -75 to 100</td>
+<td>(n) -100 to 100</td>
+<td>(o) -75 to 100</td>
+    </tr>
+<tr>
+      <th rowspan="3">21-day ($\hat{\sigma}_t^{21}$)</th>
+      <th>ITM</th>
+      <td>(p) -50 to 50</td>
+<td>(q) -50 to 50</td>
+<td>(r) -25 to 50</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(p) -75 to 75</td>
+<td>(q) -75 to 75</td>
+<td>(r) -75 to 75</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(p) -75 to 100</td>
+<td>(q) -100 to 100</td>
+<td>(r) -75 to 100</td>
+    </tr>
+<tr>
+      <th rowspan="3">252-day ($\hat{\sigma}_t^{252}$)</th>
+      <th>ITM</th>
+      <td>(s) -25 to 50</td>
+<td>(t) -25 to 75</td>
+<td>(u) -25 to 75</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(s) -50 to 100</td>
+<td>(t) -75 to 100</td>
+<td>(u) -50 to 100</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(s) -75 to 75</td>
+<td>(t) -50 to 50</td>
+<td>(u) -75 to 100</td>
+    </tr>
+<tr>
+      <th rowspan="3">VBI ($\hat{\sigma}_t^{vbi}$)</th>
+      <th>ITM</th>
+      <td>(v) -50 to 50</td>
+<td>(w) -25 to 50</td>
+<td>(x) -25 to 50</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>(v) -100 to 50</td>
+<td>(w) -50 to 100</td>
+<td>(x) -50 to 50</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>(v) -75 to 50</td>
+<td>(w) -75 to 75</td>
+<td>(x) -75 to 50</td>
+    </tr>
+  </tbody>
+</table>
+
+### Fig. 6. Pricing errors of models according to moneyness for put options: Full sample.
+
+736
+
+---
+
+*Z. İltüzer* *Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Fig. 7. Pricing error distributions for BIST 30 index options — panels (a) through (x) by model, volatility forecasting approach, and moneyness (ITM, ATM, OTM)
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th rowspan="2">Moneyness</th>
+      <th colspan="3">Pricing Error Range (approximate)</th>
+    </tr>
+<tr>
+      <th>BS Model</th>
+      <th>NN1 Model</th>
+      <th>NN2 Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3">(a-c) $\hat{\sigma}_t^{implied}$</th>
+      <th>ITM</th>
+      <td>-2 to 0</td>
+<td>-2 to 1</td>
+<td>-1 to 1</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 1</td>
+<td>-1 to 2</td>
+<td>-2 to 2</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-5 to 0</td>
+<td>-3 to 3</td>
+<td>-2 to 5</td>
+    </tr>
+<tr>
+      <th rowspan="3">(d-f) $\hat{\sigma}_t^{garch}$</th>
+      <th>ITM</th>
+      <td>-2 to 0</td>
+<td>-1 to 1</td>
+<td>-1 to 1</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-2 to 2</td>
+<td>-1 to 2</td>
+<td>-1 to 2</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-3 to 1</td>
+<td>-1 to 3</td>
+<td>-1 to 6</td>
+    </tr>
+<tr>
+      <th rowspan="3">(g-i) $\hat{\sigma}_t^{360}$</th>
+      <th>ITM</th>
+      <td>-3 to 0</td>
+<td>-1 to 1</td>
+<td>-1 to 1</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 1</td>
+<td>-2 to 2</td>
+<td>-2 to 2</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-4 to 1</td>
+<td>-3 to 3</td>
+<td>-1 to 6</td>
+    </tr>
+<tr>
+      <th rowspan="3">(j-l) $\hat{\sigma}_t^{30}$</th>
+      <th>ITM</th>
+      <td>-2 to 2</td>
+<td>-1 to 2</td>
+<td>-1 to 2</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 2</td>
+<td>-1 to 3</td>
+<td>-2 to 3</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-4 to 2</td>
+<td>-1 to 3</td>
+<td>-2 to 6</td>
+    </tr>
+<tr>
+      <th rowspan="3">(m-o) $\hat{\sigma}_t^{10}$</th>
+      <th>ITM</th>
+      <td>-3 to 1</td>
+<td>-1 to 2</td>
+<td>-1 to 1</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 2</td>
+<td>-2 to 2</td>
+<td>-2 to 2</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-5 to 2</td>
+<td>-3 to 3</td>
+<td>-2 to 5</td>
+    </tr>
+<tr>
+      <th rowspan="3">(p-r) $\hat{\sigma}_t^{21}$</th>
+      <th>ITM</th>
+      <td>-3 to 1</td>
+<td>-1 to 2</td>
+<td>-1 to 2</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 2</td>
+<td>-1 to 3</td>
+<td>-2 to 3</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-4 to 2</td>
+<td>-1 to 4</td>
+<td>-1 to 6</td>
+    </tr>
+<tr>
+      <th rowspan="3">(s-u) $\hat{\sigma}_t^{252}$</th>
+      <th>ITM</th>
+      <td>-3 to 1</td>
+<td>0 to 3</td>
+<td>-1 to 2</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 2</td>
+<td>-1 to 3</td>
+<td>-1 to 4</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-4 to 2</td>
+<td>0 to 4</td>
+<td>-1 to 7</td>
+    </tr>
+<tr>
+      <th rowspan="3">(v-x) $\hat{\sigma}_t^{vbi}$</th>
+      <th>ITM</th>
+      <td>-3 to 1</td>
+<td>-1 to 1</td>
+<td>-1 to 2</td>
+    </tr>
+<tr>
+      <th>ATM</th>
+      <td>-3 to 2</td>
+<td>-1 to 2</td>
+<td>-1 to 3</td>
+    </tr>
+<tr>
+      <th>OTM</th>
+      <td>-4 to 2</td>
+<td>-2 to 3</td>
+<td>-1 to 5</td>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 7. Pricing errors of models according to moneyness for put options: Subsample.
+
+737
+
+---
+
+Z. İltüzer *Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Pricing errors by model and volatility forecasting approach — panels (a) through (x); y-axis: pricing error; x-axis: time-to-maturity
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th colspan="3">Model</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>$\hat{\sigma}_t^{implied}$</th>
+      <td>(a) BS($\hat{\sigma}_t^{implied}$)</td>
+<td>(b) NN1($\hat{\sigma}_t^{implied}$)</td>
+<td>(c) NN2($\hat{\sigma}_t^{implied}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{garch}$</th>
+      <td>(d) BS($\hat{\sigma}_t^{garch}$)</td>
+<td>(e) NN1($\hat{\sigma}_t^{garch}$)</td>
+<td>(f) NN2($\hat{\sigma}_t^{garch}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{360}$</th>
+      <td>(g) BS($\hat{\sigma}_t^{360}$)</td>
+<td>(h) NN1($\hat{\sigma}_t^{360}$)</td>
+<td>(i) NN2($\hat{\sigma}_t^{360}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{30}$</th>
+      <td>(j) BS($\hat{\sigma}_t^{30}$)</td>
+<td>(k) NN1($\hat{\sigma}_t^{30}$)</td>
+<td>(l) NN2($\hat{\sigma}_t^{30}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{10}$</th>
+      <td>(m) BS($\hat{\sigma}_t^{10}$)</td>
+<td>(n) NN1($\hat{\sigma}_t^{10}$)</td>
+<td>(o) NN2($\hat{\sigma}_t^{10}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{21}$</th>
+      <td>(p) BS($\hat{\sigma}_t^{21}$)</td>
+<td>(q) NN1($\hat{\sigma}_t^{21}$)</td>
+<td>(r) NN2($\hat{\sigma}_t^{21}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{252}$</th>
+      <td>(s) BS($\hat{\sigma}_t^{252}$)</td>
+<td>(t) NN1($\hat{\sigma}_t^{252}$)</td>
+<td>(u) NN2($\hat{\sigma}_t^{252}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{vbi}$</th>
+      <td>(v) BS($\hat{\sigma}_t^{vbi}$)</td>
+<td>(w) NN1($\hat{\sigma}_t^{vbi}$)</td>
+<td>(x) NN2($\hat{\sigma}_t^{vbi}$)</td>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 8. Pricing errors of models according to time-to-maturity for put options: Full sample.
+
+738
+
+---
+
+Z. İltüzer *Borsa İstanbul Review 22-4 (2022) 725–742*
+
+### Pricing errors by moneyness and time-to-maturity across different models and volatility forecasting approaches. Panels (a)-(x) show pricing errors (y-axis) against time-to-maturity (x-axis) for ITM (y=140), ATM (y=90), and OTM (y=30) options.
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Volatility Forecasting Approach</th>
+      <th colspan="3">Model</th>
+    </tr>
+<tr>
+      <th>BS</th>
+      <th>NN1</th>
+      <th>NN2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>$\hat{\sigma}_t^{implied}$</th>
+      <td>(a) BS($\hat{\sigma}_t^{implied}$)</td>
+<td>(b) NN1($\hat{\sigma}_t^{implied}$)</td>
+<td>(c) NN2($\hat{\sigma}_t^{implied}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{garch}$</th>
+      <td>(d) BS($\hat{\sigma}_t^{garch}$)</td>
+<td>(e) NN1($\hat{\sigma}_t^{garch}$)</td>
+<td>(f) NN2($\hat{\sigma}_t^{garch}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{360}$</th>
+      <td>(g) BS($\hat{\sigma}_t^{360}$)</td>
+<td>(h) NN1($\hat{\sigma}_t^{360}$)</td>
+<td>(i) NN2($\hat{\sigma}_t^{360}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{30}$</th>
+      <td>(j) BS($\hat{\sigma}_t^{30}$)</td>
+<td>(k) NN1($\hat{\sigma}_t^{30}$)</td>
+<td>(l) NN2($\hat{\sigma}_t^{30}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{10}$</th>
+      <td>(m) BS($\hat{\sigma}_t^{10}$)</td>
+<td>(n) NN1($\hat{\sigma}_t^{10}$)</td>
+<td>(o) NN2($\hat{\sigma}_t^{10}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{21}$</th>
+      <td>(p) BS($\hat{\sigma}_t^{21}$)</td>
+<td>(q) NN1($\hat{\sigma}_t^{21}$)</td>
+<td>(r) NN2($\hat{\sigma}_t^{21}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{252}$</th>
+      <td>(s) BS($\hat{\sigma}_t^{252}$)</td>
+<td>(t) NN1($\hat{\sigma}_t^{252}$)</td>
+<td>(u) NN2($\hat{\sigma}_t^{252}$)</td>
+    </tr>
+<tr>
+      <th>$\hat{\sigma}_t^{vbi}$</th>
+      <td>(v) BS($\hat{\sigma}_t^{vbi}$)</td>
+<td>(w) NN1($\hat{\sigma}_t^{vbi}$)</td>
+<td>(x) NN2($\hat{\sigma}_t^{vbi}$)</td>
+    </tr>
+  </tbody>
+</table>
+
+### Summary of pricing error distributions across panels (a) to (x)
+
+<table>
+  <thead>
+    <tr>
+      <th>Panel</th>
+      <th>Model &#x26; Volatility Approach</th>
+      <th>Moneyness Category (Y-axis)</th>
+      <th>Time-to-Maturity Range (X-axis)</th>
+      <th>Pricing Error Concentration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3">(a)</th>
+      <td rowspan="3">BS($\hat{\sigma}_t^{implied}$)</td>
+      <th>ITM (140)</th>
+      <td>-5 to 5</td>
+<td>Scattered around 0</td>
+    </tr>
+<tr>
+      <th>ATM (90)</th>
+      <td>-5 to 5</td>
+<td>Concentrated around 0</td>
+    </tr>
+<tr>
+      <th>OTM (30)</th>
+      <td>-5 to 5</td>
+<td>Concentrated around 0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(b)</th>
+      <td rowspan="3">NN1($\hat{\sigma}_t^{implied}$)</td>
+      <th>ITM (140)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th>ATM (90)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th>OTM (30)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th rowspan="3">(c)</th>
+      <td rowspan="3">NN2($\hat{\sigma}_t^{implied}$)</td>
+      <th>ITM (140)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th>ATM (90)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th>OTM (30)</th>
+      <td>-5 to 5</td>
+<td>Tight cluster at 0</td>
+    </tr>
+<tr>
+      <th colspan="5">... [Panels (d) through (x) follow similar visual patterns with varying degrees of dispersion around the zero-error vertical line at x=0] ...</th>
+    </tr>
+  </tbody>
+</table>
+
+Fig. 9. Pricing errors of models according to time-to-maturity for put options: Subsample.
+
+739
+
+---
+
+
+
+Z. İltüzer
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+sample and subsample analysis, respectively. The BS model tends toward underpricing for short-, medium-, and long-term call options with all volatility forecasting approaches except for implied volatility and historical volatility estimated by data for the past ten days. However, the NN2 model consistently overprices short-term call options with all volatility approaches, and NN1 does not show any noticeable overpricing or underpricing tendency except with historical volatility estimated with data for the past ten days. In <u>Fig. 5</u>, showing the results of the subsample analysis, BS underpricing and NN1 and NN2 overpricing behavior also exist during turbulent times both for short-term and medium-term call options. Because the test sample only has one long-term call option with a time to maturity of approximately 250 days, it is excluded from the graphs in order to provide better representations of short- and medium-term call options.
+
+## 3.2. Put options
+
+<mark>Tables 3 and 4</mark> present the out-of-sample RMSEs of the models for put options for the moneyness and time-to-maturity dimensions for the full-sample and subsample analyses, respectively. The best model is BS with 360-day historical volatility for all moneyness dimensions—that is, OTM, ATM, and ITM put options. In terms of the time-to-maturity dimension, the best model is again BS with historical volatility estimated by the past 360 days of the data for all groups in the time-to-maturity dimension, that is, short- and medium-term put options. BS with VBI is the best model for long-term put options, closely followed by the second-lowest RMSE value in BS with historical volatility estimated by the past 360 days of data. For short-term put options, BS is the best model with all volatility forecasting approaches. Overall, for put options in Turkish option market, the dominant model is BS with historical volatility estimated by the past 360 days of data regardless of the moneyness and time-to-maturity dimensions. The models with the best pricing performance during turbulent periods are BS with VBI, NN2 (or BS) with implied volatility, and NN2 with historical volatility estimated by the past 360 days of data for OTM, ATM, and ITM options, respectively. BS is the dominant model with all volatility forecasting approaches for OTM put options during both normal and turbulent periods whereas NN is the dominant model with all volatility forecasting approaches during turbulent periods for ATM and ITM put options. In terms of the time-to-maturity dimension, NN1 with implied volatility is the best model for short-term options, and NN2 with GARCH volatility is the best model for medium-term options. No results are reported for long-term options during turbulent periods because of the absence of put options, whose maturity is longer than 90 days and the closing price in April 2018 is not zero.
+
+The results and methodology provided here can be used by practitioners as guidance for implementation of NN models and choosing a pricing model without going through a detailed and computationally burdensome and complex performance evaluation process. However, as seen by the very small RMSE values in the subsample analysis, in which one-month-ahead forecasting is performed, compared to full-sample analysis, in which eight-month-ahead forecasting is performed in order to cover enough out-of-sample data to represent the groups in the moneyness and time-to-maturity dimensions, the best approach is to price options every day by expanding the sample with the addition of the previous day.
+
+<u>Figs. 6 and 7</u> depict the pricing errors, $p - \hat{p}$, in the models according to the moneyness dimension for the full sample and subsample analyses, respectively. According to the full-sample analysis, the BS model tends to overprice put options whereas NN models tend to underprice them, which is the exact opposite of the findings for call options. The same result is found in the subsample analysis. Specifically, NN2 with all volatility forecasts tends to underprice only OTM options, but NN1 underprices OTM, ATM, and ITM option, except when implied volatility forecasts and historical volatility estimated with data for the past 360 days are used.
+
+<u>Figs. 8 and 9</u> illustrate the pricing errors of the models according to the time-to-maturity dimension for the full-sample and subsample analyses. According to the full-sample results, the BS model tends to overprice short-, medium-, and long-term put options with almost all volatility forecasting approaches whereas NN models tend to underprice medium- and long-term put options. Specifically, NN2 with all volatility inputs overprices short-term options while underpricing medium- and long-term options. According to the subsample analysis, the BS model also overprices short- and medium-term options. The NN1 model underprices short- and medium-term put options in the full sample, however, the NN2 model does not show any underpricing or overpricing tendency except in the analyses using 360- and 30-day historical volatility. In the overall evaluation of RMSEs of the models in <mark>Table 3</mark> and <u>Figs. 6 and 8</u>, the BS model with historical volatility estimated by the past 360 days of data is the most accurate, despite its consistent tendency toward overpricing.
+
+The full-sample analysis shows strong evidence of the outperformance of the traditional BS option pricing model compared to NN models for put options whereas the NN2 model outperforms BS and NN1 for call options. The results for call options are consistent with the findings reported in the literature analyzing the pricing of options with NNs in more mature stock markets, such as S&P, FTSE, DAX, Nikkei, and OMX. However, during turbulent periods, the NN models perform better than the BS model for put options whereas the BS model performs better than NNs for call options.
+
+## 4. Summary and conclusion
+
+The use and importance of financial derivatives has increased, enabling economic actors to manage the risks of more integrated and volatile financial markets. This has led to rapid developments in option pricing literature, starting with the seminal work of <u>Black and Scholes (1972)</u>. Since then, many versions of the BS model have been developed, as assumptions of the model have been relaxed. However, in the
+
+740
+
+---
+
+
+
+Z. İltüzer
+
+Borsa İstanbul Review 22-4 (2022) 725–742
+
+past two decades, the performance of artificial NNs in pricing options has been examined and analyzed by researchers, especially for options on developed stock market indexes, finding outperformance by NNs compared to the traditional BS model. However, the absence of studies about options on emerging stock market indexes makes it difficult to determine whether the reported outperformance of NNs in pricing options on developed stock market indexes holds there as well. This study aims to fill this gap by comparing the pricing performance of NNs with the BS model for BIST 30 call and put index options during both tranquil and turbulent periods. The study also examines whether different volatility forecasting approaches, that is, GARCH, implied volatility, historical volatility, and implied volatility index (VBI), affect and improve model performance.
+
+In general, in tranquil periods, the NN model is the best for call options whereas the BS model is the best for put options; however, in turbulent periods, the best model is BS for call options and the NN model for put options at all moneyness and time-to-maturity dimensions. The models have poor performance in the pricing of ITM call options, with errors that are four or five times larger than for other put and call options, regardless of the model, in both tranquil and turbulent periods. The Black-Scholes model is biased toward underpricing call options and overpricing put options with almost all volatility forecasting approaches in both tranquil and turbulent periods. The results suggest that market participants treat call and put options from precisely opposite perspectives, perhaps because trading the "right to buy" is perceived as riskier than trading the "right to sell" by market participants. One avenue for fruitful future research is an investigation of the reasons for models' relative underperformance for ITM call options and developing a pricing approach for these options, as doing so could yield valuable results for participants in Turkish option markets.
+
+## **Declaration of competing interest**
+
+None.
+
+## **References**
+
+<font color="#0000FF">Ahir, H., Bloom, N., & Furceri, D. (2018). The world uncertainty index. <font color="#0000FF">https://ssrn.com/abstract=3275033</font>.</font>
+
+<font color="#0000FF">Amilon, H. (2003). A neural network versus Black–Scholes: A comparison of pricing and hedging performances. <font color="#0000FF">Journal of Forecasting, 22, 317–335. <font color="#0000FF">https://doi.org/10.1002/for.867</font></font></font>
+
+<font color="#0000FF">Amin, K. I., & Ng, V. K. (1993). Option valuation with systematic stochastic volatility. <font color="#0000FF">The Journal of Finance, 48, 881–910. <font color="#0000FF">https://doi.org/10.1111/j.1540-6261.1993.tb04023.x</font></font></font>
+
+<font color="#0000FF">Anders, U., Korn, O., & Schmitt, C. (1998). Improving the pricing of options: A neural network approach. <font color="#0000FF">Journal of Forecasting, 17, 369–388. <font color="#0000FF">https://doi.org/10.1002/(SICI)1099-131X(1998090)17:5<6>369::AID-FOR702>3.0.CO;2-S</font></font></font>
+
+<font color="#0000FF">Bennell, J., & Sutcliffe, C. (2005). Black–Scholes versus artificial neural networks in pricing FTSE 100 options. <font color="#0000FF">Intelligent Systems, 12, 243–260. <font color="#0000FF">https://doi.org/10.1002/isaf.254</font></font></font>
+
+<font color="#0000FF">Black, F., & Scholes, M. (1972). The valuation of option contracts and a test of market efficiency. <font color="#0000FF">The Journal of Finance, 27, 399–417. <font color="#0000FF">http://www.jstor.org/stable/2978484.</font></font></font>
+
+<font color="#0000FF">Bollerslev, T. (1986). Generalized autoregressive conditional heteroskedasticity. <font color="#0000FF">Journal of Econometrics, 31, 307–327. <font color="#0000FF">https://doi.org/10.1016/0304-4076(86)90063-1. <font color="#0000FF">https://www.sciencedirect.com/science/article/pii/0304407686900631</font></font></font></font>
+
+<font color="#0000FF">Boyle, P. P. (1988). A lattice framework for option pricing with two state variables. <font color="#0000FF">Journal of Financial and Quantitative Analysis, 23, 1–12. <font color="#0000FF">https://doi.org/10.2307/2331019</font></font></font>
+
+<font color="#0000FF">Chance, D. M., Hanson, T. A., Li, W., & Muthuswamy, J. (2017). A bias in the volatility smile. <font color="#0000FF">Review of Derivatives Research, 47, 47–90. <font color="#0000FF">https://doi.org/10.1007/s11147-016-9124-0</font></font></font>
+
+<font color="#0000FF">Cox, J. C., Ross, S. A., & Rubinstein, M. (1979). Option pricing: A simplified approach. <font color="#0000FF">Journal of Financial Economics, 7, 229–263. <font color="#0000FF">https://doi.org/10.1016/0304-405X(79)90015-1. <font color="#0000FF">https://www.sciencedirect.com/science/article/pii/0304405X79900151</font></font></font></font>
+
+<font color="#0000FF">Daglish, T. (2003). A pricing and hedging comparison of parametric and nonparametric approaches for American index options. <font color="#0000FF">Journal of Financial Econometrics, 1, 327–364. <font color="#0000FF">https://doi.org/10.1093/jjfinec/nbg015</font></font></font>
+
+<font color="#0000FF">Duan, J. C. (1995). The GARCH option pricing model. <font color="#0000FF">Mathematical Finance, 5, 13–32. <font color="#0000FF">https://doi.org/10.1111/j.1467-9965.1995.tb00099.x</font></font></font>
+
+<font color="#0000FF">Dumas, B., Fleming, J., & Whaley, R. E. (2002). Implied volatility functions: Empirical tests. <font color="#0000FF">The Journal of Finance, 53, 2059–2106. <font color="#0000FF">https://doi.org/10.1111/10022-1082.00083</font></font></font>
+
+<font color="#0000FF">Fadda, S. (2020). Pricing options with dual volatility input to modular neural networks. <font color="#0000FF">Borsa Istanbul Review, 20, 269–278. <font color="#0000FF">https://doi.org/10.1016/j.bir.2020.03.002. <font color="#0000FF">https://www.sciencedirect.com/science/article/pii/S2214845020300168</font></font></font></font>
+
+<font color="#0000FF">Garcia, R., & Gencay, R. (2000). Pricing and hedging derivative securities with neural networks and a homogeneity hint. <font color="#0000FF">Journal of Econometrics, 94, 93–115. <font color="#0000FF">https://doi.org/10.1016/S0304-4076(99)00018-4. <font color="#0000FF">https://www.sciencedirect.com/science/article/pii/S0304407699000184</font></font></font></font>
+
+<font color="#0000FF">Gaspar, R. M., Lopes, S. D., & Sequeira, B. (2020). Neural network pricing of American put options. <font color="#0000FF">Risks, 8, <font color="#0000FF">https://doi.org/10.3390/risks8030073. <font color="#0000FF">https://www.mdpi.com/2227-9091/8/3/73</font></font></font></font>
+
+<font color="#0000FF">Glorot, X., Bordes, A., & Bengio, Y. (2011). Deep sparse rectifier neural networks. In G. Gordon, D. Dunson, & M. Dudik (Eds.), <font color="#0000FF">Proceedings of the fourteenth international conference on artificial intelligence and statistics (pp. 315–323).</font> Fort Lauderdale, FL: PMLR. <font color="#0000FF">http://proceedings.mlr.press/v15/glorot11a.html</font></font>
+
+<font color="#0000FF">Gradojevic, N., Gencay, R., & Kukolj, D. (2009). Option pricing with modular neural networks. <font color="#0000FF">IEEE Transactions on Neural Networks, 20, 626–637. <font color="#0000FF">https://doi.org/10.1109/TNN.2008.2011130</font></font></font>
+
+<font color="#0000FF">Gu, S., Kelly, B., & Xiu, D. (2020). Empirical asset pricing via machine learning. <font color="#0000FF">Review of Financial Studies, 33, 2223–2273. <font color="#0000FF">https://doi.org/10.1093/rfs/hhaa009. arXiv <font color="#0000FF">https://academic.oup.com/rfs/article-pdf/33/5/2223/33209812/hhaa009.pdf</font></font></font></font>
+
+<font color="#0000FF">Hull, J., & White, A. (1987). The pricing of options on assets with stochastic volatilities. <font color="#0000FF">The Journal of Finance, 42, 281–300. <font color="#0000FF">https://doi.org/10.1111/j.1540-6261.1987.tb02568.x</font></font></font>
+
+<font color="#0000FF">Hutchinson, J. M., Lo, A. W., & Poggio, T. (1994). A nonparametric approach to pricing and hedging derivative securities via learning networks. <font color="#0000FF">The Journal of Finance, 49, 851–889. <font color="#0000FF">https://doi.org/10.1111/j.1540-6261.1994.tb00081.x</font></font></font>
+
+<font color="#0000FF">İltüzer Samur, Z., & Temur, G. T. (2009). The use of artificial neural network in option pricing: The case of S&P 100 index options. <font color="#0000FF">World Academy of Science, Engineering and Technology, 54, 326–331.</font></font>
+
+<font color="#0000FF">Ivaşcu, C. F. (2021). Option pricing using machine learning. <font color="#0000FF">Expert Systems with Applications, 163, 113799. <font color="#0000FF">https://doi.org/10.1016/j.eswa.2020.113799. <font color="#0000FF">https://www.sciencedirect.com/science/article/pii/S0957417420306187</font></font></font></font>
+
+<font color="#0000FF">Lajbcygier, P. (2004). Improving option pricing with the product constrained hybrid neural network. <font color="#0000FF">IEEE Transactions on Neural Networks, 15, 465–476. <font color="#0000FF">https://doi.org/10.1109/TNN.2004.824265</font></font></font>
+
+<font color="#0000FF">Lin, C. T., & Yeh, H. Y. (2005). The valuation of Taiwan stock index option price: Comparison of performances between Black-Scholes and neural network model. <font color="#0000FF">Journal of Statistics & Management Systems, 8, 355–367. <font color="#0000FF">https://doi.org/10.1080/09720510.2005.10701164</font></font></font>
+
+741
+
+---
+
+
+
+Z. İltüzer
+
+*Borsa İstanbul Review 22-4 (2022) 725–742*
+
+Lin, C. T., & Yeh, H. Y. (2009). Empirical of the Taiwan stock index option price forecasting model–applied artificial neural network. <u>Applied Economics</u>, 41, 1965–1972. <https://doi.org/10.1080/00036840601131672>
+
+Macbeth, J. D., & Merville, L. J. (1979). An empirical examination of the Black-Scholes call option pricing model. <u>The Journal of Finance</u>, 34, 1173–1186. <http://www.jstor.org/stable/2327242>.
+
+Malliaris, M., & Salchenberger, L. (1993). A neural network model for estimating option prices. <u>Journal of Applied Intelligence</u>, 3, 193–206. <https://doi.org/10.1007/BF00871937>
+
+Morelli, M. J., Montagna, G., Nicrosini, O., Treccani, M., Farina, M., & Amato, P. (2004). Pricing financial derivatives with neural networks. <u>Physica A: Statistical Mechanics and its Applications</u>, 338, 160–165. <https://doi.org/10.1016/j.physa.2004.02.038>. <https://www.sciencedirect.com/science/article/pii/S037843710400233X>
+
+Naik, V. (1993). Option valuation and hedging strategies with jumps in the volatility of asset returns. <u>The Journal of Finance</u>, 48, 1969–1984. <https://doi.org/10.1111/j.1540-6261.1993.tb05137.x>
+
+<Poon, S. H. (2005). *A practical guide to forecasting financial market volatility.* England: Wiley Finance.
+
+Rendleman, R. J., & Bartter, B. J. (1979). Two-state option pricing. <u>The Journal of Finance</u>, 34, 1093–1110. <http://www.jstor.org/stable/2327237>.
+
+Rubinstein, M. (1983). Displaced diffusion option pricing. <u>The Journal of Finance</u>, 38, 213–217. <https://doi.org/10.1111/j.1540-6261.1983.tb03636.x>
+
+Scott, L. O. (1987). Option pricing when the variance changes randomly: Theory, estimation, and an application. <u>Journal of Financial and Quantitative Analysis</u>, 22, 419–438. <https://doi.org/10.2307/2330793>
+
+Scott, L. O. (2002). Pricing stock options in a jump-diffusion model with stochastic volatility and interest rates: Applications of Fourier inversion methods. *Mathematical Finance*, 7, 413–426. <https://doi.org/10.1111/1467-9965.00039>
+
+Sensoy, A. S., & Omole, J. O. (2018). Implied volatility indices: A review and extension in the Turkish case. *International Review of Financial Analysis*, 60, 151–161. <https://doi.org/10.1016/j.irfa.2018.08.006>. <https://www.sciencedirect.com/science/article/pii/S1057521918305969>
+
+Tseng, C. H., Cheng, S. T., Wang, Y. H., & Peng, J. T. (2008). Artificial neural network model of the hybrid EGARCH volatility of the Taiwan stock index option prices. *Physica A: Statistical Mechanics and its Applications*, 387, 343192–343200. <https://doi.org/10.1016/j.physa.2008.01.074>. <https://www.sciencedirect.com/science/article/pii/S0378437108000320>
+
+Wang, Y. H. (2009a). Nonlinear neural network forecasting model for stock index option price: Hybrid GJR–GARCH approach. *Expert Systems with Applications*, 36, 564–570. <https://doi.org/10.1016/j.eswa.2007.09.056>. <https://www.sciencedirect.com/science/article/pii/S0957417407004654>
+
+Wang, Y. H. (2009b). Using neural network to forecast stock index option price: A new hybrid GARCH approach. *Quality and Quantity*, 43, 833–843. <https://doi.org/10.1007/s11135-008-9176-9>
+
+Wang, C. P., Lin, S. H., Huang, H. H., & Wu, P. C. (2012). Using neural network for forecasting TXO price under different volatility models. *Expert Systems with Applications*, 39, 5025–5032. <https://doi.org/10.1016/j.eswa.2011.11.038>. <https://www.sciencedirect.com/science/article/pii/S0957417411015818>
+
+Yadav, K. (2021). Formulation of a rational option pricing model using artificial neural networks. *SoutheastCon*, 2021, 1–8. <https://doi.org/10.1109/SoutheastCon45413.2021.9401835>
+
+Yang, Y., Zheng, Y., & Hospedales, T. (2017). Gated neural networks for option pricing: Rationality by design. In *Proceedings of the AAAI conference on artificial intelligence* (Vol. 31). <https://ojs.aaai.org/index.php/AAAI/article/view/10505>.
+
+Yao, J., Li, Y., & Tan, C. L. (2000). Option price forecasting using neural networks. *Omega*, 28, 455–466. <https://doi.org/10.1016/S0305-0483(99)00066-3>. <https://www.sciencedirect.com/science/article/pii/S0305048399000663>
+
+Zaheer, R., & Shaziya, H. (2018). GPU-based empirical evaluation of activation functions in convolutional neural networks. In *2018 2nd international conference on inventive systems and control* (pp. 769–773). ICISC. <https://doi.org/10.1109/ICISC.2018.8398903>.
+
+742

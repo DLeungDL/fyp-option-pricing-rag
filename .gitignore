@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.python-version
+.serena/
+data/chroma/
+data/parsed/zh-TW/_translate_state.json

@@ -1,0 +1,154 @@
+{
+  "job_id": "pjb-bc4i9m93idfq5qex7rg975ltux2z",
+  "name": "10505-Article Text-14033-1-2-20201228.pdf",
+  "slug": "10505-Article_Text-14033-1-2-20201228",
+  "n_remote_images": 19,
+  "n_saved_figures": 12,
+  "n_markdown_links_updated": 0,
+  "images": [
+    {
+      "filename": "page_4_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 27435,
+      "bbox": {
+        "x": 83,
+        "y": 55,
+        "w": 180,
+        "h": 119
+      }
+    },
+    {
+      "filename": "page_4_table_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 22598,
+      "bbox": {
+        "x": 324,
+        "y": 181,
+        "w": 233,
+        "h": 42
+      }
+    },
+    {
+      "filename": "page_4_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 46266,
+      "bbox": {
+        "x": 321,
+        "y": 53,
+        "w": 237,
+        "h": 97
+      }
+    },
+    {
+      "filename": "page_5_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 61948,
+      "bbox": {
+        "x": 55,
+        "y": 288,
+        "w": 236,
+        "h": 103
+      }
+    },
+    {
+      "filename": "page_5_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 43864,
+      "bbox": {
+        "x": 84,
+        "y": 54,
+        "w": 179,
+        "h": 153
+      }
+    },
+    {
+      "filename": "page_6_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 56746,
+      "bbox": {
+        "x": 61,
+        "y": 209,
+        "w": 226,
+        "h": 93
+      }
+    },
+    {
+      "filename": "page_6_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 49045,
+      "bbox": {
+        "x": 318,
+        "y": 463,
+        "w": 241,
+        "h": 102
+      }
+    },
+    {
+      "filename": "page_6_chart_3_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 16965,
+      "bbox": {
+        "x": 442,
+        "y": 296,
+        "w": 105,
+        "h": 86
+      }
+    },
+    {
+      "filename": "page_6_chart_4_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 18007,
+      "bbox": {
+        "x": 440,
+        "y": 209,
+        "w": 107,
+        "h": 86
+      }
+    },
+    {
+      "filename": "page_6_chart_5_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 18889,
+      "bbox": {
+        "x": 330,
+        "y": 209,
+        "w": 115,
+        "h": 86
+      }
+    },
+    {
+      "filename": "page_6_chart_6_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 18956,
+      "bbox": {
+        "x": 340,
+        "y": 296,
+        "w": 105,
+        "h": 86
+      }
+    },
+    {
+      "filename": "page_6_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 144246,
+      "bbox": {
+        "x": 54,
+        "y": 55,
+        "w": 502,
+        "h": 105
+      }
+    }
+  ]
+}

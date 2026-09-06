@@ -1,0 +1,262 @@
+{
+  "job_id": "pjb-yt99bc8jagcs41wxef235maie5zl",
+  "name": "Option pricing using deep learning approach based on LSTM-GRU neural networks Case of London stock exchange.pdf",
+  "slug": "Option_pricing_using_deep_learning_approach_based_on_LSTM-GRU_neural_networks_Ca",
+  "n_remote_images": 39,
+  "n_saved_figures": 21,
+  "n_markdown_links_updated": 3,
+  "images": [
+    {
+      "filename": "page_1_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 19717,
+      "bbox": {
+        "x": 55,
+        "y": 89,
+        "w": 195,
+        "h": 51
+      }
+    },
+    {
+      "filename": "page_4_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 239373,
+      "bbox": {
+        "x": 47,
+        "y": 96,
+        "w": 500,
+        "h": 241
+      }
+    },
+    {
+      "filename": "page_6_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 60788,
+      "bbox": {
+        "x": 181,
+        "y": 190,
+        "w": 211,
+        "h": 125
+      }
+    },
+    {
+      "filename": "page_7_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 24298,
+      "bbox": {
+        "x": 168,
+        "y": 329,
+        "w": 264,
+        "h": 125
+      }
+    },
+    {
+      "filename": "page_8_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 49503,
+      "bbox": {
+        "x": 143,
+        "y": 77,
+        "w": 323,
+        "h": 149
+      }
+    },
+    {
+      "filename": "page_9_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 86531,
+      "bbox": {
+        "x": 49,
+        "y": 569,
+        "w": 499,
+        "h": 195
+      }
+    },
+    {
+      "filename": "page_10_table_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 140113,
+      "bbox": {
+        "x": 46,
+        "y": 261,
+        "w": 501,
+        "h": 173
+      }
+    },
+    {
+      "filename": "page_10_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 172382,
+      "bbox": {
+        "x": 47,
+        "y": 558,
+        "w": 500,
+        "h": 154
+      }
+    },
+    {
+      "filename": "page_11_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 32757,
+      "bbox": {
+        "x": 73,
+        "y": 114,
+        "w": 211,
+        "h": 138
+      }
+    },
+    {
+      "filename": "page_11_chart_3_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 31493,
+      "bbox": {
+        "x": 319,
+        "y": 115,
+        "w": 210,
+        "h": 136
+      }
+    },
+    {
+      "filename": "page_11_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 83251,
+      "bbox": {
+        "x": 157,
+        "y": 451,
+        "w": 280,
+        "h": 277
+      }
+    },
+    {
+      "filename": "page_13_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 22029,
+      "bbox": {
+        "x": 311,
+        "y": 444,
+        "w": 216,
+        "h": 128
+      }
+    },
+    {
+      "filename": "page_13_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 19166,
+      "bbox": {
+        "x": 59,
+        "y": 442,
+        "w": 218,
+        "h": 135
+      }
+    },
+    {
+      "filename": "page_13_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 57102,
+      "bbox": {
+        "x": 46,
+        "y": 96,
+        "w": 501,
+        "h": 93
+      }
+    },
+    {
+      "filename": "page_14_table_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 90542,
+      "bbox": {
+        "x": 46,
+        "y": 96,
+        "w": 501,
+        "h": 184
+      }
+    },
+    {
+      "filename": "page_17_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 28217,
+      "bbox": {
+        "x": 291,
+        "y": 431,
+        "w": 216,
+        "h": 111
+      }
+    },
+    {
+      "filename": "page_17_chart_4_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 30914,
+      "bbox": {
+        "x": 59,
+        "y": 295,
+        "w": 225,
+        "h": 116
+      }
+    },
+    {
+      "filename": "page_17_chart_2_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 25978,
+      "bbox": {
+        "x": 291,
+        "y": 296,
+        "w": 218,
+        "h": 111
+      }
+    },
+    {
+      "filename": "page_17_chart_3_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 30104,
+      "bbox": {
+        "x": 56,
+        "y": 431,
+        "w": 229,
+        "h": 113
+      }
+    },
+    {
+      "filename": "page_18_image_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 12824,
+      "bbox": {
+        "x": 65,
+        "y": 293,
+        "w": 140,
+        "h": 42
+      }
+    },
+    {
+      "filename": "page_18_chart_1_v2.jpg",
+      "category": "layout",
+      "content_type": "image/jpeg",
+      "bytes": 35299,
+      "bbox": {
+        "x": 184,
+        "y": 83,
+        "w": 227,
+        "h": 153
+      }
+    }
+  ]
+}
