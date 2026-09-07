@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BIST 30 Option Pricing: Neural Networks vs Black–Scholes</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #171e27;
+      --ink: #f4f1ea;
+      --muted: #b7c0c9;
+      --line: rgba(244,241,234,.12);
+      --gold: #d4a24c;
+      --teal: #6fc3b2;
+      --rose: #e07a6a;
+      --blue: #7aa2d4;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      background: var(--bg); color: var(--ink);
+      font-family: "Segoe UI", "Noto Sans TC", "PingFang TC", sans-serif;
+    }
+    .deck {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .stage {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 18px 18px 8px;
+    }
+    .slide {
+      display: none;
+      width: min(1280px, 100%);
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(1200px 500px at 100% -10%, rgba(212,162,76,.08), transparent 50%),
+        linear-gradient(180deg, #1b232e 0%, #12181f 100%);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 42px 52px 36px;
+      overflow: hidden;
+      position: relative;
+    }
+    .slide.active { display: block; }
+    .kicker {
+      color: var(--gold);
+      letter-spacing: .14em;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { margin: 0 0 12px; font-weight: 720; letter-spacing: -.02em; }
+    h1 { font-size: 42px; line-height: 1.18; max-width: 18ch; }
+    h2 { font-size: 34px; line-height: 1.2; }
+    p, li { color: var(--muted); font-size: 22px; line-height: 1.45; }
+    .lead {
+      font-size: 26px;
+      color: var(--ink);
+      max-width: 42ch;
+      margin-top: 18px;
+    }
+    .meta { margin-top: 28px; color: var(--muted); font-size: 18px; }
+    .grid-2 { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: start; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+    .card {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .card h3 { font-size: 18px; color: var(--ink); margin-bottom: 8px; }
+    .card p, .card li { font-size: 17px; margin: 0; }
+    .card ol, .card ul { padding-left: 18px; margin: 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 18px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--gold); font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+    td { color: var(--ink); }
+    .eq {
+      font-family: "Cambria Math", "Times New Roman", serif;
+      background: #10161d;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: var(--teal);
+      font-size: 20px;
+      margin: 8px 0 12px;
+    }
+    .punch {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 4px solid var(--gold);
+      background: rgba(212,162,76,.08);
+      color: var(--ink);
+      font-size: 20px;
+    }
+    .win { color: var(--teal); font-weight: 700; }
+    .loss { color: var(--rose); font-weight: 700; }
+    img.fig {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+    }
+    img.fig.small { max-height: 360px; }
+    .caption { font-size: 14px; color: var(--muted); margin-top: 8px; }
+    .footer {
+      position: absolute;
+      left: 52px; right: 52px; bottom: 18px;
+      display: flex; justify-content: space-between;
+      color: #8b96a1; font-size: 13px;
+    }
+    .bar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px 10px;
+      color: #8b96a1;
+      font-size: 14px;
+    }
+    .nav { display: flex; gap: 8px; }
+    button {
+      background: #22303d;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    button:hover { border-color: var(--gold); color: var(--gold); }
+    .tag { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
+    .tag.gold { background: rgba(212,162,76,.15); color: var(--gold); }
+    .tag.teal { background: rgba(111,195,178,.15); color: var(--teal); }
+    .tag.rose { background: rgba(224,122,106,.15); color: var(--rose); }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="stage">
+
+      <section class="slide active" data-title="Title">
+        <div class="kicker">FYP Presentation · Paper Focus</div>
+        <h1>Neural Networks vs Black–Scholes for BIST 30 Index Options</h1>
+        <p class="lead">同一個新興市場、同一批期權，換模型與波動率之後，誰比較準？平靜期和動盪期答案一樣嗎？</p>
+        <div class="meta">
+          İltüzer (2022), <em>Borsa İstanbul Review</em><br />
+          Option pricing with neural networks vs. Black–Scholes under different volatility forecasting approaches
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>01 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Why this paper">
+        <div class="kicker">Why this paper</div>
+        <h2>成熟市場常說 NN 贏，新興市場卻幾乎沒被驗證</h2>
+        <div class="grid-3" style="margin-top:22px">
+          <div class="card">
+            <h3>01. 證據偏美歐日</h3>
+            <p>S&amp;P、FTSE、DAX、Nikkei 上，多數研究指 NN 優於 BS，尤其 ATM 與 OTM。</p>
+          </div>
+          <div class="card">
+            <h3>02. 新興市場幾乎空白</h3>
+            <p>台灣指數期權是少數例外，而且有時是 BS 比較準。BIST 30 市場更淺、波動更高。</p>
+          </div>
+          <div class="card">
+            <h3>03. 波動率才是關鍵假設</h3>
+            <p>這篇不換整套隨機波動率模型，而是把波動率預測當成實驗因子，系統地比下去。</p>
+          </div>
+        </div>
+        <div class="punch">貢獻不是新公式，而是把「NN 是否穩贏 BS」變成一個可被市場狀態推翻的實證問題。</div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>02 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Research questions">
+        <div class="kicker">Research questions</div>
+        <h2>三個問題，整場都圍繞它們</h2>
+        <div class="grid-3" style="margin-top:28px">
+          <div class="card">
+            <div class="tag gold">RQ1</div>
+            <h3 style="margin-top:12px">NN 有沒有整體優於 BS？</h3>
+            <p>對 BIST 30 歐式買權與賣權，資料驅動的神經網路是否比 Black–Scholes 更準。</p>
+          </div>
+          <div class="card">
+            <div class="tag teal">RQ2</div>
+            <h3 style="margin-top:12px">哪一種波動率最好？</h3>
+            <p>歷史波動率、GARCH、隱含波動率、VBI，哪一種讓定價 RMSE 最低。</p>
+          </div>
+          <div class="card">
+            <div class="tag rose">RQ3</div>
+            <h3 style="margin-top:12px">切開之後會不會翻盤？</h3>
+            <p>依 moneyness、到期長短、平靜／動盪期拆開，結論是否仍然成立。</p>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>03 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Data">
+        <div class="kicker">Data and split</div>
+        <h2>時間序列切分，避免未來資料漏進訓練</h2>
+        <div class="grid-2" style="margin-top:8px">
+          <table>
+            <tr><th>項目</th><th>設定</th></tr>
+            <tr><td>標的</td><td>BIST 30 歐式 call / put</td></tr>
+            <tr><td>期權樣本</td><td>2017/03–2021/08</td></tr>
+            <tr><td>無風險利率</td><td>TRLIBOR 插值</td></tr>
+            <tr><td>Train</td><td>2017/03–2020/06</td></tr>
+            <tr><td>Validation</td><td>2020/07–2020/12</td></tr>
+            <tr><td>Test</td><td>2021/01–2021/08</td></tr>
+            <tr><td>動盪子樣本</td><td>2018/04（依 WUI）</td></tr>
+          </table>
+          <div>
+            <div class="card">
+              <h3>Moneyness</h3>
+              <p>ITM / ATM / OTM 分開評估，因為價內期權價格較大，RMSE 容易被拉高。</p>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <h3>Time-to-maturity</h3>
+              <p>短 ≤ 1 個月；中 1–3 個月；長 &gt; 3 個月。</p>
+            </div>
+            <div class="punch">不是隨機抽樣。金融時間序列必須按時間切，測試集才代表「沒見過的未來」。</div>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>04 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Models">
+        <div class="kicker">Pricing models</div>
+        <h2>同一個波動率輸入，餵給三種定價函數</h2>
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <h3>Black–Scholes</h3>
+              <p>經典公式，但 \(\sigma\) 不是常數，而是換成 \(g(\sigma_t)\)。</p>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <h3>NN1：模仿 BS 的輸入</h3>
+              <div class="eq">c<sub>t</sub> = f(S<sub>t</sub>, X, r<sub>t</sub>, T−t, g(σ<sub>t</sub>))</div>
+              <p>現貨與履約價分開餵入。</p>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <h3>NN2：齊次設定（Hutchinson et al. 1994）</h3>
+              <div class="eq">c<sub>t</sub>/X = f(S<sub>t</sub>/X, r<sub>t</sub>, T−t, g(σ<sub>t</sub>))</div>
+              <p>只餵 moneyness，較不容易被價格水準帶走。</p>
+            </div>
+          </div>
+          <div>
+            <img class="fig small" src="assets/mlp.jpg" alt="Single-hidden-layer MLP" />
+            <div class="caption">Fig. 1 · 單隱藏層 MLP。ReLU、L-BFGS、validation early stopping。波動率是輸入特徵，不是模型本身。</div>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>05 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Volatility">
+        <div class="kicker">Volatility forecasts</div>
+        <h2>這篇真正操縱的變數，是波動率怎麼估</h2>
+        <div class="grid-4" style="margin-top:18px">
+          <div class="card">
+            <h3>Historical volatility</h3>
+            <p>日對數報酬年化標準差。視窗：10 / 30 / 360 曆日，以及 21 / 252 交易日。短窗跟近況，長窗較平滑。</p>
+          </div>
+          <div class="card">
+            <h3>GARCH(1,1)</h3>
+            <p>捕捉波動聚集（volatility clustering）。每天用最近一年報酬滾動估計，再年化。</p>
+          </div>
+          <div class="card">
+            <h3>Implied volatility</h3>
+            <p>用當日最接近 ATM 的合約反解 BS 的 σ，再套到同一天其他合約。這是市場今天報的波動率。</p>
+          </div>
+          <div class="card">
+            <h3>VBI</h3>
+            <p>土耳其期權市場隱含波動率指數，把市場不確定性收成一條指數。</p>
+          </div>
+        </div>
+        <div class="punch">後面所有 RMSE 表，比的都是「模型 × 波動率」組合，不是單一神經網路。</div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>06 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Call full sample">
+        <div class="kicker">Results · Call · Full sample</div>
+        <h2>平時買權：NN2 配 implied vol 最準</h2>
+        <div class="grid-2">
+          <div>
+            <img class="fig" src="assets/table1-call-full.jpg" alt="Table 1 call full-sample RMSE" />
+            <div class="caption">Table 1 · Out-of-sample RMSEs for call options, full sample.</div>
+          </div>
+          <div>
+            <div class="card">
+              <h3>要指的三點</h3>
+              <ul>
+                <li>全樣本最佳常是 <span class="win">NN2 + implied volatility</span>。</li>
+                <li>OTM、ITM、短／中期，NN2 多半贏過 BS 與 NN1。</li>
+                <li>ITM 誤差約是 OTM／ATM 的 4–5 倍：價內期權大家都定不準。</li>
+              </ul>
+            </div>
+            <div class="punch">平時買權，資料驅動的 NN2 較貼市價。NN2 的齊次輸入，也比 NN1 更穩。</div>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>07 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Call turbulent">
+        <div class="kicker">Results · Call · Turbulent subsample</div>
+        <h2>2018 年 4 月一亂，短期買權改由 BS 勝出</h2>
+        <div class="grid-2">
+          <div>
+            <img class="fig" src="assets/table2-call-turbulent.jpg" alt="Table 2 call turbulent RMSE" />
+            <div class="caption">Table 2 · Call options in April 2018, the turbulent month identified by WUI.</div>
+          </div>
+          <div>
+            <div class="card">
+              <h3>翻盤在哪</h3>
+              <ul>
+                <li>OTM／ATM：<span class="win">BS + 30-day / 21-day historical vol</span> 最好。</li>
+                <li>短期買權：不論波動率怎麼換，BS 多半贏 NN。</li>
+                <li>NN 在平靜期學到的非線性，遇到 regime shift 會失效。</li>
+              </ul>
+            </div>
+            <div class="punch">文獻常說 NN 贏。這篇顯示：一進入動盪，參數少、行為可預期的 BS 反而更穩。</div>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>08 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Put">
+        <div class="kicker">Results · Put</div>
+        <h2>賣權故事相反：平常是一年歷史波動率的 BS</h2>
+        <div class="grid-2">
+          <div>
+            <img class="fig small" src="assets/table3-put-full.jpg" alt="Table 3 put full-sample RMSE" />
+            <div class="caption">Tables 3–4 · Put-option RMSEs, full sample and turbulent subsample.</div>
+          </div>
+          <div>
+            <div class="card">
+              <h3>全樣本</h3>
+              <p><span class="win">BS + 360-day historical vol</span> 幾乎橫掃 OTM／ATM／ITM，以及短／中期。長期則是 BS + VBI。</p>
+            </div>
+            <div class="card" style="margin-top:12px">
+              <h3>動盪期</h3>
+              <p>OTM 仍是 BS。ATM／ITM 變成 NN 較好。短期：NN1 + implied；中期：NN2 + GARCH。</p>
+            </div>
+            <div class="punch">不能把 call 的結論直接套到 put。買賣權不對稱，本身就是結果。</div>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>09 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Scoreboard">
+        <div class="kicker">Takeaway table</div>
+        <h2>整場只記這張：勝負是條件式的</h2>
+        <table style="margin-top:18px; font-size:22px">
+          <tr>
+            <th></th>
+            <th>平靜／全樣本</th>
+            <th>動盪期（2018/04）</th>
+          </tr>
+          <tr>
+            <td><strong>Call</strong></td>
+            <td class="win">NN 贏，尤其 NN2 + implied vol</td>
+            <td class="loss">BS 贏，尤其短窗 historical vol</td>
+          </tr>
+          <tr>
+            <td><strong>Put</strong></td>
+            <td class="win">BS 贏，尤其 360-day historical vol</td>
+            <td>NN 在 ATM／ITM 追上；OTM 仍是 BS</td>
+          </tr>
+        </table>
+        <div class="grid-2" style="margin-top:22px">
+          <div class="card">
+            <h3>偏差方向</h3>
+            <p>BS 常 underprice 買權；NN2 常 overprice 短期買權。動盪期這個模式還在。</p>
+          </div>
+          <div class="card">
+            <h3>一句話結論</h3>
+            <p>不是 NN 取代 BS，而是模型選擇取決於波動率、選擇權類型，以及市場狀態。</p>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>10 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Contribution">
+        <div class="kicker">Contribution and limits</div>
+        <h2>這篇把問題變清楚，而不是把模型變更大</h2>
+        <div class="grid-2" style="margin-top:10px">
+          <div class="card">
+            <h3>可以帶走的貢獻</h3>
+            <ol>
+              <li>新興市場上，NN 優於 BS 不是普遍定律。</li>
+              <li>波動率輸入會改排名：implied vol 幫 NN，長窗歷史波動率幫 BS 賣權。</li>
+              <li>必須做 subsample：平靜與動盪會翻盤。</li>
+              <li>齊次的 NN2 通常比原始 NN1 穩。</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>先自己講的限制</h3>
+            <ol>
+              <li>單一市場、單一指數。</li>
+              <li>動盪期只有一個月；長期 put 樣本很少。</li>
+              <li>淺層 MLP，不是 LSTM／深度結構。</li>
+              <li>比的是 RMSE，不是交易利潤或避險誤差。</li>
+              <li>Implied vol 從 ATM 市價反解，帶有市場資訊優勢。</li>
+            </ol>
+          </div>
+        </div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>11 / 12</span></div>
+      </section>
+
+      <section class="slide" data-title="Close">
+        <div class="kicker">Close</div>
+        <h1 style="max-width:22ch">要先選對波動率和市場狀態，再決定用不用神經網路。</h1>
+        <p class="lead">BIST 30 的證據顯示：買權平時 NN2 較準，一動盪 BS 較穩；賣權平時則是一年歷史波動率的 BS。</p>
+        <div class="meta">Q&amp;A · İltüzer (2022)</div>
+        <div class="footer"><span>BIST 30 · NN vs BS</span><span>12 / 12</span></div>
+      </section>
+
+    </div>
+    <div class="bar">
+      <div>← → 或空白鍵翻頁 · F 全螢幕 · Home / End 跳到首尾</div>
+      <div class="nav">
+        <button type="button" id="prev">上一頁</button>
+        <button type="button" id="next">下一頁</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    let i = 0;
+    const show = (n) => {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+    };
+    document.getElementById("prev").onclick = () => show(i - 1);
+    document.getElementById("next").onclick = () => show(i + 1);
+    window.addEventListener("keydown", (e) => {
+      if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) { e.preventDefault(); show(i + 1); }
+      if (["ArrowLeft", "PageUp", "Backspace"].includes(e.key)) { e.preventDefault(); show(i - 1); }
+      if (e.key === "Home") show(0);
+      if (e.key === "End") show(slides.length - 1);
+      if (e.key.toLowerCase() === "f") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
