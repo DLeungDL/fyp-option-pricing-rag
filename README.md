@@ -1,4 +1,4 @@
-# FYP Local RAG
+# Option pricing Local RAG
 
 Local retrieval-augmented generation over LlamaParse markdown and extracted figures for the option-pricing papers in this project.
 
